@@ -235,6 +235,13 @@ function inject(){
   const eid=card.dataset.eid;if(!eid||card.dataset.prepAttached==="1")continue;const e=byId.get(eid);
   if(!e)continue;card.dataset.prepAttached="1";
   const body=card.querySelector(".detail");if(!body)continue;
+  if(eid==="C301"){
+   const subtitle=card.querySelector(".cond");if(subtitle)subtitle.textContent="의술 Lv.5 또는 연단 누적 250 후보 · 내력은 별도 판정(29·54/남궁호심결 Lv.3)";
+   for(const li of body.querySelectorAll("li"))if(li.textContent.includes("내력 55 이상 권장"))li.textContent="내력은 29·54 기준 및 남궁호심결 Lv.3과 조합하는 판정이라는 조사 내용(게임 스크립트 미검증)";
+  }
+  if(eid==="Y304"){
+   for(const li of body.querySelectorAll("li"))if(li.textContent.includes("찌르기 3회"))li.textContent="일반 공격으로 무기 파손 판정 3회를 유도(2026-10-20 공개 공략 기준). 기존 '찌르기 3회' 서술과 충돌";
+  }
   const panel=make("section","m-prep");panel.append(make("h4","m-prep-title","◈ 다음 주요 분기까지의 준비"));
   const core=(primary[route]||[]).find(id=>idx.has(id)&&idx.get(id)>idx.get(eid));
   panel.append(renderBlock(core,"다음 핵심 분기"));
