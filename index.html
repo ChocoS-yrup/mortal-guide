@@ -771,7 +771,61 @@ html[data-reading-size="large"] { --reading-size: 17px; }
       dialog.showModal();cancel.focus({preventScroll:true});
     });
   }
-  window.MORTAL_UI=Object.freeze({icon,toast,confirmAction});
+  // Display wording stays separate from the original guide data and progress IDs.
+  const eventTitles=Object.freeze({
+    C101:"남제자방에서 대사형 만나기",
+    C102:"엽씨 남매 돕고 첫 인연 맺기",
+    C104:"객잔에서 엽씨 남매 후속 인연 이어가기",
+    C105:"엽운주 상급 목검 획득",
+    C106:"이부귀·복온 인연 맺기",
+    C107:"남궁천 돕고 인물 관계 등록 확인",
+    Y201:"철권항 방문해 욱죽 인연 시작",
+    U201:"비천각 수련·우소매 달리기 제안 수락",
+    C202:"전투에서 버티고 서생 인연 확인",
+    Y202:"철권항 3회 방문 후 추격 경로 선택",
+    U202:"비천각 수련 후 학애 해금 확인",
+    C204:"철권항에서 4월 연속 이벤트 진행",
+    Y203:"철권문 계절 시험 전승 보상 획득",
+    Y204:"철권문 계절 시험 무승부 보상 획득",
+    C205:"놓친 4월 연속 이벤트 재발생 시 완료",
+    Y205:"철권항 제작 첫 이벤트 시작",
+    Y206:"단조 반복 후 철권항 제작 후속 진행",
+    Y207:"다른 활동 후 철권항 제작 대체 분기 확인",
+    U203:"학애 반복 대련으로 수련 진행도 올리기",
+    C206:"비천각 수련·단조로 탐험대 후속 이벤트 확인",
+    Y209:"제작 설계도 획득",
+    Y210:"욱죽 심계 확인·유학 종료 선택",
+    U204:"우소매 유학 종료 시 전용 경로 선택",
+    Y211:"설계도를 활용한 후속 제작",
+    U205:"강릉 야간 권법 수련·우소매 동행 선택",
+    Y212:"강릉 이후 욱죽 경로 선택·당문 합류 확인",
+    Y214:"시장 일거리 선택",
+    U206:"당문에서 활동하며 우소매 생활 이벤트 확인",
+    U207:"시장 활동으로 추가 동료 탐험 이벤트 확인",
+    Y215:"대문 외출로 욱죽 의복 이벤트 진행",
+    Y301:"당문에 남아 제작 후속 이벤트 확인",
+    C301:"의술 추가 분기 선택",
+    Y302:"대장간에서 욱죽 관계 경로 선택",
+    Y303:"특수 방어구 강화 선택",
+    U301:"우소매 전용 장비 획득",
+    C302:"공동파로 향하는 후속 경로 선택",
+    C303:"공동파 단체전 돌파",
+    U302:"우소매 특수 전투 A 생존",
+    U303:"우소매 특수 전투 B 구공 사용",
+    Y304:"욱죽 특수 전투 진행 조건 달성",
+    Y305:"이전 회차 업적 연계 분기 확인",
+    Y306:"대장간에서 욱죽 무림대회 동행 제안",
+    U304:"부엌에서 우소매 무림대회 동행 선택",
+    Y307:"금향궁 대련 승리 후 추가 선택 확인",
+    U305:"금향궁 동행 중 안내·대화 선택",
+    Y308:"객잔에서 바로 휴식 선택",
+    Y309:"대장간에서 욱죽 설계도·장비 선택",
+    Y310:"서무림맹 진입 후 욱죽 후속 이벤트 확인",
+    Y401:"욱죽 최종 추가 장비 이벤트 확인",
+    U401:"우소매 최종 후속 선택지 확인"
+  });
+  const eventTitle=event=>eventTitles[event.id]||event.title;
+  window.MORTAL_UI=Object.freeze({icon,toast,confirmAction,eventTitle});
 })();
 </script>
 <script>
@@ -779,7 +833,7 @@ html[data-reading-size="large"] { --reading-size: 17px; }
 (function(){
 const D=JSON.parse(document.getElementById("data").textContent),E=D.events,M=new Map(E.map(e=>[e.id,e]));
 const RN={yukjuk:"욱죽",usomae:"우소매"},IN={required:"필수",recommended:"추천",optional:"선택"},K="MORTAL_PROGRESS_V1",VERS=1,SCHEMA="mortal-progress";
-const {icon,toast,confirmAction}=window.MORTAL_UI;
+const {icon,toast,confirmAction,eventTitle}=window.MORTAL_UI;
 const $=id=>document.getElementById(id),all=r=>E.filter(e=>e.route==="common"||e.route===r),done=e=>S.done[S.route][e.id]===true;
 const safe=s=>/결말|엔딩|운명점|운명|사망|죽음|흑막|정체/.test(String(s))?"스포일러 방지를 위해 해당 설명을 숨겼습니다.":String(s);
 function el(tag,cls,text){let x=document.createElement(tag);if(cls)x.className=cls;if(text!==undefined)x.textContent=String(text);return x}
@@ -798,33 +852,33 @@ function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){warning("
 let importance="all",year=0,search="",incomplete=false,unverifiedOnly=false;const opened=new Set(),closedYears=new Set();
 const issues=e=>(D.verification_issues||[]).filter(x=>x.related.includes(e.id));
 const needsVerify=e=>!!e.verification||!!e.conflict_review_required||!e.verified_source_url;
-function matches(e){if(year&&e.year!==year)return false;if(importance!=="all"&&e.importance!==importance)return false;if(incomplete&&done(e))return false;if(unverifiedOnly&&!needsVerify(e))return false;if(search){let v=[e.id,e.title,e.place,e.date_label,e.year+"년차",e.month+"월",e.phase,...e.requirements,...e.actions,...e.avoid,e.note||""].map(safe).join(" ").toLocaleLowerCase("ko");if(!v.includes(search.toLocaleLowerCase("ko")))return false}return true}
+function matches(e){if(year&&e.year!==year)return false;if(importance!=="all"&&e.importance!==importance)return false;if(incomplete&&done(e))return false;if(unverifiedOnly&&!needsVerify(e))return false;if(search){let v=[e.id,e.title,eventTitle(e),e.place,e.date_label,e.year+"년차",e.month+"월",e.phase,...e.requirements,...e.actions,...e.avoid,e.note||""].map(safe).join(" ").toLocaleLowerCase("ko");if(!v.includes(search.toLocaleLowerCase("ko")))return false}return true}
 function field(p,title,values,ol,kind=""){let a=(Array.isArray(values)?values:[values]).filter(v=>v!==null&&v!==undefined&&String(v).trim());if(!a.length)return;let section=el("section","reading-section "+kind);add(section,"h4","",title);let list=el(ol?"ol":"ul");a.forEach(v=>add(list,"li","",safe(v)));section.append(list);p.append(section);return section}
 function setDone(e,value){if(value)S.done[S.route][e.id]=true;else delete S.done[S.route][e.id];save();render()}
-function makeCard(e){let row=el("div","row"),lab=el("label","check"),input=el("input");input.type="checkbox";input.dataset.focusKey="event-"+e.id;input.checked=done(e);input.setAttribute("aria-label",safe(e.title)+" 완료");input.addEventListener("change",()=>setDone(e,input.checked));let box=el("span","check-box");box.setAttribute("aria-hidden","true");box.append(icon("check"));lab.append(input,box);row.append(lab);
+function makeCard(e){let row=el("div","row"),lab=el("label","check"),input=el("input");input.type="checkbox";input.dataset.focusKey="event-"+e.id;input.checked=done(e);input.setAttribute("aria-label",safe(eventTitle(e))+" 완료");input.addEventListener("change",()=>setDone(e,input.checked));let box=el("span","check-box");box.setAttribute("aria-hidden","true");box.append(icon("check"));lab.append(input,box);row.append(lab);
 let detail=el("details","event "+e.importance+(done(e)?" done":""));detail.dataset.eid=e.id;detail.open=opened.has(e.id);let sum=el("summary"),meta=el("div","cardmeta");
 add(meta,"span","date",e.date_label||e.year+"년차");add(meta,"span","flag "+e.importance,IN[e.importance]||e.importance);sum.append(meta);
-add(sum,"div","ename",safe(e.title));
+add(sum,"div","ename",safe(eventTitle(e)));
 let tail=el("div","cardmeta");add(tail,"span","route-tag",e.route==="common"?"공통":"전용");add(tail,"span","",safe(e.place||"장소 미상"));let hint=add(tail,"span","hint");hint.setAttribute("aria-hidden","true");add(hint,"span","hint-closed","자세히 보기");add(hint,"span","hint-open","접기");sum.append(tail,icon("chevron","event-chevron"));detail.append(sum);
 let body=el("div","detail");field(body,"지금 할 행동",e.actions,true,"action-section");field(body,"필요한 능력치 · 호감도 · 조건",e.requirements,false,"condition-section");const caution=field(body,"주의할 선택 · 기한",e.avoid,false,"caution-section");if(caution)caution.querySelector("h4").prepend(icon("warning"));
-if(e.depends_on.length){let section=el("section","reading-section");add(section,"h4","","먼저 확인할 이벤트");let deps=el("div","deps");e.depends_on.forEach(id=>{let p=M.get(id),b=el("button",done(p)?"yes":"no",(done(p)?"✓ ":"○ ")+safe(p.title));b.type="button";b.setAttribute("aria-label",safe(p.title)+" · "+(done(p)?"완료":"미완료")+" · 이동");b.addEventListener("click",()=>jump(id));deps.append(b)});section.append(deps);add(section,"p","sub","체크는 진행 기록이며, 실제 조건 충족을 판정하지 않습니다.");body.append(section)}
+if(e.depends_on.length){let section=el("section","reading-section");add(section,"h4","","먼저 확인할 이벤트");let deps=el("div","deps");e.depends_on.forEach(id=>{let p=M.get(id),b=el("button",done(p)?"yes":"no",(done(p)?"✓ ":"○ ")+safe(eventTitle(p)));b.type="button";b.setAttribute("aria-label",safe(eventTitle(p))+" · "+(done(p)?"완료":"미완료")+" · 이동");b.addEventListener("click",()=>jump(id));deps.append(b)});section.append(deps);add(section,"p","sub","체크는 진행 기록이며, 실제 조건 충족을 판정하지 않습니다.");body.append(section)}
 field(body,"참고 메모",[e.note],false);
 if(needsVerify(e)){let box=el("div","warning verification-note");add(box,"strong","",e.conflict_review_required?"조건 충돌 · 확인이 필요한 정보":"검증 필요 · 공략 정보 안내");add(box,"p","","날짜·수치·필수 여부는 기존 대화에서 정리한 초안으로 독립 검증되지 않았습니다. 원문 확인 전 확정 조건으로 믿지 마세요.");issues(e).forEach(i=>add(box,"p","",i.id+" · "+safe(i.subject)+" — "+safe(i.details)));body.append(box)}
-let actions=el("div","event-actions"),complete=el("button","btn"+(done(e)?"":" primary"),done(e)?"완료 취소":"완료로 표시"),collapse=el("button","btn ghost","접기");complete.type=collapse.type="button";complete.dataset.focusKey="complete-"+e.id;complete.setAttribute("aria-label",safe(e.title)+" · "+complete.textContent);complete.addEventListener("click",()=>{const value=!done(e);if(value)opened.delete(e.id);setDone(e,value)});collapse.addEventListener("click",()=>{detail.open=false;opened.delete(e.id);sum.focus({preventScroll:true});detail.scrollIntoView({block:"nearest"});syncListActions()});actions.append(complete,collapse);body.append(actions);
+let actions=el("div","event-actions"),complete=el("button","btn"+(done(e)?"":" primary"),done(e)?"완료 취소":"완료로 표시"),collapse=el("button","btn ghost","접기");complete.type=collapse.type="button";complete.dataset.focusKey="complete-"+e.id;complete.setAttribute("aria-label",safe(eventTitle(e))+" · "+complete.textContent);complete.addEventListener("click",()=>{const value=!done(e);if(value)opened.delete(e.id);setDone(e,value)});collapse.addEventListener("click",()=>{detail.open=false;opened.delete(e.id);sum.focus({preventScroll:true});detail.scrollIntoView({block:"nearest"});syncListActions()});actions.append(complete,collapse);body.append(actions);
 detail.append(body);detail.addEventListener("toggle",event=>{if(event.target!==detail||!detail.isConnected)return;detail.open?opened.add(e.id):opened.delete(e.id);syncListActions()});row.append(detail);return row}
 function jump(id){const e=M.get(id);if(!e)return;if(!all(S.route).includes(e)){warning("해당 선행 이벤트가 현재 루트에 없습니다.");return}reset(false);closedYears.delete(e.year);opened.add(id);render();const x=Array.from(document.querySelectorAll("[data-eid]")).find(x=>x.dataset.eid===id);if(x){x.open=true;x.scrollIntoView({block:"center",behavior:window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches?"auto":"smooth"});x.querySelector("summary").focus({preventScroll:true})}}
 function drawControls(){document.documentElement.dataset.theme=S.theme;$("theme").replaceChildren(icon(S.theme==="dark"?"sun":"moon"),el("span","",S.theme==="dark"?"밝은 화면":"어두운 화면"));$("theme").setAttribute("aria-label",S.theme==="dark"?"밝은 화면으로 전환":"어두운 화면으로 전환");$("yTab").tabIndex=S.route==="yukjuk"?0:-1;$("uTab").tabIndex=S.route==="usomae"?0:-1;$("routePanel").setAttribute("aria-labelledby",S.route==="yukjuk"?"yTab":"uTab");$("yTab").setAttribute("aria-selected",String(S.route==="yukjuk")),$("uTab").setAttribute("aria-selected",String(S.route==="usomae"));let list=all(S.route),n=list.filter(done).length,pct=Math.round(n/list.length*100);$("progressLabel").textContent=RN[S.route]+" 루트 진행률";$("progress").textContent=n+" / "+list.length;$("bar").style.width=pct+"%";$("percent").textContent=pct+"% 완료 · 전체 이벤트 기준";$("meter").setAttribute("aria-valuenow",pct);
 let years=$("years");years.replaceChildren();[[0,"전체"],[1,"1년차"],[2,"2년차"],[3,"3년차"],[4,"4년차"]].forEach(([v,n])=>{let b=el("button","chip",n);b.type="button";b.dataset.focusKey="year-"+v;b.prepend(icon(v?"calendar":"layers"));add(b,"span","year-count",v?list.filter(e=>e.year===v).length:list.length);b.setAttribute("aria-pressed",String(v===year));b.addEventListener("click",()=>{year=v;closedYears.clear();render();$("timeline").scrollIntoView({block:"start"})});years.append(b)});
 let f=$("filters");f.replaceChildren();[["all","전체"],["required","필수"],["recommended","추천"],["optional","선택"]].forEach(([v,n])=>{let b=el("button","chip",n);b.type="button";b.dataset.focusKey="importance-"+v;b.setAttribute("aria-pressed",String(v===importance));b.addEventListener("click",()=>{importance=v;render()});f.append(b)})}
 function restoreControlFocus(key,index=-1){if(!key)return;const target=Array.from(document.querySelectorAll("[data-focus-key]")).find(n=>n.dataset.focusKey===key);if(target){const card=target.closest(".event");if(card&&!card.open){card.querySelector("summary").focus({preventScroll:true});card.scrollIntoView({block:"nearest"})}else target.focus({preventScroll:true});return}if(index>=0){const checks=Array.from(document.querySelectorAll("#timeline .check input"));const next=checks[Math.min(index,checks.length-1)];if(next){const section=next.closest(".year");section.open=true;next.focus({preventScroll:true});next.scrollIntoView({block:"nearest"})}else{$("resultText").focus({preventScroll:true})}}}
-function syncListActions(){const cards=Array.from(document.querySelectorAll("#timeline details.event"));$("expandAll").disabled=!cards.length;$("expandAll").textContent=cards.length&&cards.every(c=>c.open)?"모두 접기":"모두 펼치기";const next=sorted(all(S.route).filter(matches)).find(e=>!done(e));$("resume").disabled=!next;$("resume").title=next?next.date_label+" · "+safe(next.title):"현재 목록에 미완료 이벤트가 없습니다.";$("resume").setAttribute("aria-label",next?"첫 미완료 이벤트로 이동: "+safe(next.title):"현재 목록에 미완료 이벤트가 없습니다.")}
+function syncListActions(){const cards=Array.from(document.querySelectorAll("#timeline details.event"));$("expandAll").disabled=!cards.length;$("expandAll").textContent=cards.length&&cards.every(c=>c.open)?"모두 접기":"모두 펼치기";const next=sorted(all(S.route).filter(matches)).find(e=>!done(e));$("resume").disabled=!next;$("resume").title=next?next.date_label+" · "+safe(eventTitle(next)):"현재 목록에 미완료 이벤트가 없습니다.";$("resume").setAttribute("aria-label",next?"첫 미완료 이벤트로 이동: "+safe(eventTitle(next)):"현재 목록에 미완료 이벤트가 없습니다.")}
 function render(){let focusKey=document.activeElement?.dataset.focusKey;const focusId=focusKey?.replace(/^(event|complete)-/,""),previousCards=Array.from(document.querySelectorAll("#timeline details.event")),focusIndex=previousCards.findIndex(c=>c.dataset.eid===focusId);drawControls();let data=sorted(all(S.route).filter(matches)),list=$("timeline");list.replaceChildren();$("resultText").textContent=RN[S.route]+" 루트 · "+data.length+"개 표시 / "+all(S.route).length+"개 전체";if(!data.length){let empty=add(list,"div","empty");add(empty,"p","","해당 조건의 이벤트가 없습니다.");let clear=add(empty,"button","btn","필터 초기화하고 전체 보기");clear.type="button";clear.addEventListener("click",()=>{reset();$("search").focus()});syncListActions();restoreControlFocus(focusKey,focusIndex);return}
 for(let y=1;y<=4;y++){let events=data.filter(e=>e.year===y);if(!events.length)continue;let sec=el("details","year");sec.open=!closedYears.has(y);let sm=el("summary");add(sm,"span","year-number",String(y).padStart(2,"0"));add(sm,"strong","",y+"년차");add(sm,"span","sub year-meta",events.length+"개 이벤트");sm.append(icon("chevron"));sec.append(sm);let body=el("div","inner"),last=-1;events.forEach(e=>{if(last!==e.month){last=e.month;add(body,"h3","month",e.month?e.month+"월 · 시작 시점 기준":"최종 구간 · 날짜 미확정")}body.append(makeCard(e))});sec.append(body);sec.addEventListener("toggle",event=>{if(event.target!==sec||!sec.isConnected)return;sec.open?closedYears.delete(y):closedYears.add(y)});list.append(sec)}syncListActions();restoreControlFocus(focusKey,focusIndex)}
 function reset(draw=true){importance="all";year=0;search="";incomplete=unverifiedOnly=false;$("search").value="";["incomplete","unverified"].forEach(id=>$(id).checked=false);closedYears.clear();if(draw)render()}
 function back(){let obj={schema:SCHEMA,version:VERS,route:S.route,saved_at:new Date().toISOString(),done:S.done},blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="공동신위_진행백업_"+new Date().toISOString().slice(0,10)+".json";document.body.append(a);a.click();a.remove();toast("진행 백업 파일을 다운로드 요청했습니다.");setTimeout(()=>URL.revokeObjectURL(url),3000)}
 async function restore(file){if(!file)return;try{if(file.size>1048576)throw Error("파일 크기가 1MB를 넘습니다.");let obj=JSON.parse(await file.text());if(obj.schema!==SCHEMA||obj.version!==VERS||!obj.saved_at||Number.isNaN(Date.parse(obj.saved_at)))throw Error("백업 형식/버전/저장 시점이 올바르지 않습니다.");let candidate=validate({...obj,theme:S.theme});if(!await confirmAction({title:"백업을 복원할까요?",message:"현재 두 루트의 완료 기록을 백업 파일 내용으로 바꿉니다. 기존 기록이 필요하면 먼저 진행 백업을 해 주세요.",action:"복원하기"}))return;S=candidate;save();render();$("backupStatus").classList.add("hidden");toast("진행 기록을 복원했습니다.")}catch(e){$("management").open=true;$("backupStatus").textContent="복원 실패: "+e.message+" 기존 진행 상태는 유지됩니다.";$("backupStatus").classList.remove("hidden");$("backupStatus").focus();$("backupStatus").scrollIntoView({block:"nearest"})}}
 function prField(p,title,items,order){let a=(Array.isArray(items)?items:[items]).filter(Boolean);if(!a.length)return;add(p,"strong","",title);let list=el(order?"ol":"ul");a.forEach(v=>add(list,"li","",safe(v)));p.append(list)}
-function makePrint(){let scope=$("printScope").value,a=scope==="yukjuk"||scope==="usomae"?all(scope):all(S.route);if(scope==="required")a=a.filter(x=>x.importance==="required");if(scope==="filtered")a=a.filter(matches);a=sorted(a);let root=$("printView");root.replaceChildren();add(root,"h1","","공동신위 · "+(RN[scope]||RN[S.route])+" 공략");add(root,"p","pr-caption","기존 대화 기반 검증 전 자료 · 인쇄 "+new Date().toLocaleDateString("ko-KR")+" · "+a.length+"개 이벤트");let ly=0,lm=-1;for(const e of a){if(ly!==e.year){ly=e.year;lm=-1;add(root,"h2","pr-year",ly+"년차")}if(lm!==e.month){lm=e.month;add(root,"h3","pr-month",lm===null?"최종 구간":lm+"월")}let c=el("section","pr-card");add(c,"div","pr-caption",(S.done[scope==="yukjuk"||scope==="usomae"?scope:S.route][e.id]?"☑ ":"☐ ")+e.date_label+" · "+IN[e.importance]+" · "+(needsVerify(e)?"⚠ 검증 필요":"검증됨")+" · "+e.id);add(c,"h4","",safe(e.title));prField(c,"장소",e.place);prField(c,"조건",e.requirements);prField(c,"진행 순서",e.actions,true);prField(c,"주의사항",e.avoid);prField(c,"선행 이벤트",e.depends_on);prField(c,"메모",e.note);if(issues(e).length)prField(c,"검증 이슈",issues(e).map(i=>i.id+" "+i.subject+" "+i.details));root.append(c)}window.print()}
+function makePrint(){let scope=$("printScope").value,a=scope==="yukjuk"||scope==="usomae"?all(scope):all(S.route);if(scope==="required")a=a.filter(x=>x.importance==="required");if(scope==="filtered")a=a.filter(matches);a=sorted(a);let root=$("printView");root.replaceChildren();add(root,"h1","","공동신위 · "+(RN[scope]||RN[S.route])+" 공략");add(root,"p","pr-caption","기존 대화 기반 검증 전 자료 · 인쇄 "+new Date().toLocaleDateString("ko-KR")+" · "+a.length+"개 이벤트");let ly=0,lm=-1;for(const e of a){if(ly!==e.year){ly=e.year;lm=-1;add(root,"h2","pr-year",ly+"년차")}if(lm!==e.month){lm=e.month;add(root,"h3","pr-month",lm===null?"최종 구간":lm+"월")}let c=el("section","pr-card");add(c,"div","pr-caption",(S.done[scope==="yukjuk"||scope==="usomae"?scope:S.route][e.id]?"☑ ":"☐ ")+e.date_label+" · "+IN[e.importance]+" · "+(needsVerify(e)?"⚠ 검증 필요":"검증됨")+" · "+e.id);add(c,"h4","",safe(eventTitle(e)));prField(c,"장소",e.place);prField(c,"조건",e.requirements);prField(c,"진행 순서",e.actions,true);prField(c,"주의사항",e.avoid);prField(c,"선행 이벤트",e.depends_on);prField(c,"메모",e.note);if(issues(e).length)prField(c,"검증 이슈",issues(e).map(i=>i.id+" "+i.subject+" "+i.details));root.append(c)}window.print()}
 $("yTab").addEventListener("click",()=>{S.route="yukjuk";save();render()});$("uTab").addEventListener("click",()=>{S.route="usomae";save();render()});
 $("theme").addEventListener("click",()=>{S.theme=S.theme==="dark"?"light":"dark";try{localStorage.setItem("MORTAL_THEME_CHOICE_V1",S.theme)}catch(e){}save();render()});
 $("search").addEventListener("input",e=>{search=e.target.value.trim();render()});for(let [id,fn] of [["incomplete",v=>incomplete=v],["unverified",v=>unverifiedOnly=v]])$(id).addEventListener("change",e=>{fn(e.target.checked);render()});
@@ -950,7 +1004,7 @@ function openGuide(key,btn){const g=guides[key];if(!g)return;const dialog=docume
 function skillButton(key){const b=make("button","m-help",key);b.type="button";b.append(window.MORTAL_UI.icon("help"));b.setAttribute("aria-label",key+" 육성 도움말 열기");b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openGuide(key,b)});return b}
 function makeTargets(row,keys){let present=keys.filter(k=>guides[k]);if(!present.length)return;const wrap=make("div","m-prep-actions");for(const k of present)wrap.append(skillButton(k));row.append(wrap)}
 function renderBlock(next,label){const wrap=make("section","m-prep-section");wrap.append(make("div","m-prep-date",label));if(!next){wrap.append(make("p","m-prep-subtle","현재 데이터에 추가로 기록된 주요 분기가 없습니다."));return wrap}
- const e=byId.get(next),head=make("div","m-prep-head"),title=make("span","m-prep-name",e.title),date=make("span","m-prep-date",e.date_label);head.append(title,date);wrap.append(head);
+ const e=byId.get(next),head=make("div","m-prep-head"),title=make("span","m-prep-name",window.MORTAL_UI.eventTitle(e)),date=make("span","m-prep-date",e.date_label);head.append(title,date);wrap.append(head);
  if(derived[next]){wrap.append(make("p","m-prep-subtle",derived[next].text));makeTargets(wrap,derived[next].skills)}
  else if(e.requirements?.length){const ul=make("ul","m-prep-notes");for(const req of e.requirements.slice(0,3))ul.append(make("li","",req));wrap.append(ul)}
  if(next==="C205")wrap.append(make("p","m-prep-subtle","보완 기회는 기존 이벤트를 놓쳤을 때의 조건부 항목입니다."));
