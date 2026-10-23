@@ -1,71 +1,716 @@
 <!doctype html><html lang="ko" data-theme="dark"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>공동신위 · 욱죽·우소매 공략</title><meta name="color-scheme" content="dark light">
-<style>
-:root{color-scheme:dark;font-family:"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--bg:#0c1219;--pane:#18212b;--soft:#202b37;--line:#374450;--fg:#f4f3ef;--muted:#acb6bc;--gold:#edcc91;--blue:#9fc7ee;--green:#a4dbbc;--red:#f1afa8}
-html[data-theme=light]{color-scheme:light;--bg:#f6f3ed;--pane:#fff;--soft:#f2f1ee;--line:#d4d9dd;--fg:#202c35;--muted:#596773;--gold:#835c22;--blue:#326a97;--green:#246847;--red:#a73f38}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);line-height:1.55}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
-#app{max-width:1440px;margin:auto;padding:26px clamp(12px,3.2vw,48px) 80px}.hero{border:1px solid var(--line);background:radial-gradient(circle at 85% 0,rgba(207,173,108,.12),transparent 45%),var(--pane);border-radius:24px;padding:clamp(20px,3vw,44px)}.eyebrow{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}h1{font-size:clamp(30px,4vw,48px);line-height:1.15;letter-spacing:-.05em;margin:13px 0 8px}h1 i{font-style:normal;color:var(--gold)}.lead,.muted{color:var(--muted)}.lead{font-size:14px;max-width:670px;margin:0 0 24px}
-.hero-bottom{display:grid;grid-template-columns:1fr minmax(220px,330px);gap:25px;align-items:end}.tabs,.btnrow,.filters,.navyears,.cardmeta,.topline{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.btn,.tab,.chip{border:1px solid var(--line);border-radius:10px;min-height:39px;padding:7px 13px;background:var(--soft);color:var(--fg);font-weight:700}.tab{background:transparent;min-width:130px}.btn:hover,.tab:hover,.chip:hover{border-color:var(--gold)}[aria-pressed=true],[aria-selected=true]{background:rgba(204,167,101,.14);border-color:var(--gold);color:var(--gold)}.sub{font-size:12px;color:var(--muted)}.progressmeta{display:flex;justify-content:space-between;align-items:center;gap:10px}.num{font-size:23px;font-weight:800}.meter{height:8px;border-radius:50px;background:var(--line);overflow:hidden;margin:8px 0}.bar{height:100%;width:0;background:var(--gold);transition:width .2s}
-.notice{border:1px solid var(--line);border-radius:13px;background:rgba(204,167,101,.08);padding:12px 15px;font-size:13px;margin:16px 0;color:var(--muted)}.notice strong{color:var(--gold)}#alert{border-color:var(--red);color:var(--fg)}
-.layout{display:grid;grid-template-columns:235px minmax(0,1fr);align-items:start;gap:22px;margin-top:28px}.side{position:sticky;top:16px;border:1px solid var(--line);border-radius:17px;background:var(--pane);padding:20px}.side h2{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:0 0 12px}.navyears{display:grid;grid-template-columns:repeat(2,1fr)}.navyears .chip{text-align:center}.side hr{border:0;border-top:1px solid var(--line);margin:18px 0}.side .btn{width:100%;text-align:left;margin:4px 0}
-.main{min-width:0}.toolbox{border:1px solid var(--line);background:var(--pane);padding:16px;border-radius:15px}.search{width:100%;min-height:44px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 13px;color:var(--fg)}.filters{margin-top:12px}.chip{min-height:35px;font-size:12px}.switches{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--muted)}.switches label{display:flex;gap:7px;align-items:center;cursor:pointer}.switches input,.check input{accent-color:var(--green);width:18px;height:18px}
-.resultline{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;margin:16px 0 12px;color:var(--muted);font-size:13px}.year{background:var(--pane);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px}.year>summary{cursor:pointer;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;list-style:none;background:var(--soft)}.year>summary::-webkit-details-marker,.event>summary::-webkit-details-marker{display:none}.year strong{font-size:20px}.year .inner{padding:6px 16px 18px}.month{font-size:15px;color:var(--gold);border-bottom:1px solid var(--line);padding:18px 3px 8px;margin:0 0 12px}.row{display:grid;grid-template-columns:34px minmax(0,1fr);gap:6px;margin:0 0 10px}.check{padding-top:22px;display:flex;justify-content:center;cursor:pointer}
-.event{min-width:0;border:1px solid var(--line);border-left:3px solid var(--line);border-radius:12px;background:var(--bg);overflow:hidden}.event.required{border-left-color:var(--gold)}.event.done{opacity:.64}.event.done .ename{text-decoration:line-through}.event>summary{list-style:none;padding:14px 16px;cursor:pointer}.event>summary:hover{background:rgba(204,167,101,.07)}.cardmeta{font-size:12px;color:var(--muted)}.date{font-weight:800;color:var(--gold)}.flag{border:1px solid var(--line);border-radius:6px;font-size:11px;font-weight:700;padding:1px 7px}.flag.required{color:var(--gold);border-color:var(--gold)}.flag.verify{color:var(--red)}.ename{font-size:16px;font-weight:800;margin:8px 0 5px;letter-spacing:-.025em}.cond{color:var(--muted);font-size:13px;margin:0}.hint{margin-left:auto;color:var(--gold)}.event[open] .hint{display:none}.detail{border-top:1px solid var(--line);padding:17px}.detail h4{color:var(--gold);font-size:12px;margin:12px 0 3px}.detail h4:first-child{margin-top:0}.detail ul,.detail ol{padding-left:23px;margin:5px 0;font-size:13px}.detail li{margin:4px 0}.detail p{margin:4px 0;font-size:13px}.deps{display:flex;flex-wrap:wrap;gap:6px}.deps button{padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--soft);color:var(--fg);text-align:left;font-size:12px}.deps .yes{color:var(--green)}.deps .no{color:var(--red)}.warning{border:1px solid var(--line);background:rgba(204,167,101,.08);padding:10px;border-radius:8px;font-size:12px;margin-top:12px}.empty{border:1px dashed var(--line);border-radius:12px;padding:40px 15px;text-align:center}.foot{margin-top:30px;border-top:1px solid var(--line);padding-top:20px;font-size:12px;color:var(--muted)}.hidden{display:none!important}#printView{display:none}
-@media(max-width:950px){.layout{grid-template-columns:1fr}.side{position:static;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.side h2,.side hr,.side .tip{display:none}.navyears{display:flex}.side .btn{width:auto;margin:0}}
-@media(max-width:600px){#app{padding:12px}.hero{padding:22px 18px;border-radius:16px}.hero-bottom{grid-template-columns:1fr;gap:20px}.tabs .tab{flex:1;min-width:0}.num{font-size:20px}.year .inner{padding:6px 9px 15px}.year>summary{padding:15px}.event>summary{padding:13px 11px}.detail{padding:13px}.row{grid-template-columns:28px minmax(0,1fr)}.ename{font-size:15px}.side{padding:13px}.navyears .chip{padding:8px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
-@page{size:A4;margin:14mm}
-@media print{html,body{background:#fff!important;color:#111!important}#app{display:none!important}#printView{display:block!important;font-family:"Malgun Gothic",sans-serif;font-size:9pt}.pr-year{font-size:16pt;border-bottom:1px solid #777;break-after:avoid}.pr-month{font-size:12pt;break-after:avoid}.pr-card{border:1px solid #ccc;border-radius:3mm;padding:3mm 4mm;margin-bottom:4mm;break-inside:avoid}.pr-card h4{font-size:11pt;margin:2mm 0}.pr-card p,.pr-card li{margin:1mm 0}.pr-card ul,.pr-card ol{padding-left:6mm;margin:1mm 0}.pr-card strong{font-size:9pt}.pr-caption{font-size:9pt;color:#555}}
+<style id="m-kvfx-theme">
+/* KVFX UI — 웹 참고 구현. 위쪽은 토큰 변수(kvfx-ui.tokens.json에서 생성), 아래쪽은 컴포넌트.
+   다크: <html data-theme="dark"> 또는 OS 설정(data-theme="light"로 끌 수 있다).
+   글꼴: Noto Sans KR 400·500·700 (Google Fonts). 컴포넌트는 class="kv" 안에서 쓴다. */
 
-/* Preparation goals & contextual cultivation help — 2026-10-23 */
-.m-prep{border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:14px 15px;margin:0 0 18px;display:grid;gap:12px}
-.m-prep-title{color:var(--gold);font-size:13px;font-weight:850;letter-spacing:.025em;margin:0}
-.m-prep-section{border-top:1px solid var(--line);padding-top:10px}
-.m-prep-head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:start}
-.m-prep-name{font-weight:800;font-size:14px}
-.m-prep-date{font-size:12px;color:var(--muted)}
-.m-prep-notes{padding:0 0 0 19px;margin:8px 0 0;font-size:12px;color:var(--fg)}
-.m-prep-notes li{margin:4px 0}
-.m-prep-subtle{font-size:12px;color:var(--muted);margin:5px 0 0}
-.m-prep-actions{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0}
-.m-help{display:inline-flex;gap:5px;align-items:center;text-align:left;line-height:1.25;white-space:normal;background:var(--bg);border:1px solid var(--gold);color:var(--gold);font-weight:750;border-radius:9px;padding:6px 9px;font-size:12px;min-height:32px;cursor:pointer}
-.m-help:hover{background:rgba(204,167,101,.12)}.m-help:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.m-help-inline{margin:5px 3px 0 0;border-color:var(--line);color:var(--blue);font-size:11px}
-.m-source{font-size:12px;color:var(--blue);overflow-wrap:anywhere}
-.m-dialog{background:var(--pane);color:var(--fg);border:1px solid var(--line);border-radius:17px;box-shadow:0 18px 80px rgba(0,0,0,.5);width:min(560px,calc(100% - 22px));max-height:min(83dvh,750px);overflow:auto;padding:0}
-.m-dialog::backdrop{background:rgba(0,0,0,.66)}
-.m-dialog-top{padding:20px 21px 12px;position:sticky;top:0;background:var(--pane);border-bottom:1px solid var(--line);z-index:1;display:flex;gap:12px;align-items:start;justify-content:space-between}
-.m-dialog-top h2{font-size:23px;letter-spacing:-.035em;margin:3px 0 0}
-.m-dialog-body{padding:16px 21px 24px}.m-dialog-body h3{font-size:13px;color:var(--gold);margin:17px 0 7px}.m-dialog-body p,.m-dialog-body li{font-size:13px;line-height:1.7}.m-dialog-body ol{padding-left:21px;margin:5px 0}
-.m-dialog-body li{margin:7px 0}.m-dialog-note{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:rgba(204,167,101,.1);font-size:12px;white-space:pre-wrap}
-.m-dialog-close{background:var(--soft);border:1px solid var(--line);color:var(--fg);border-radius:8px;min-width:39px;min-height:39px;font-size:21px;cursor:pointer}
-@media(max-width:600px){.m-prep{padding:12px}.m-dialog-top{padding:15px}.m-dialog-body{padding:14px 15px 19px}.m-dialog{max-height:90dvh}}
-@media print{.m-dialog{display:none!important}}
-</style></head><body>
+:root {
+  --bg: #f4f4f4;
+  --surface: #ffffff;
+  --well: #f4f4f4;
+  --ink: #242424;
+  --ink-muted: #6b6b6b;
+  --line: #e3e3e3;
+  --divider: #ebebeb;
+  --dash: #d6d6d6;
+  --hover: #e6e6e6;
+  --strong: #242424;
+  --on-strong: #ffffff;
+  --accent: #f37021;
+  --on-accent: #242424;
+  --current: #fde3d1;
+  --danger: #9b1c1c;
+  --on-danger: #ffffff;
+  --alert: #b42318;
+  --warn: #8a6a00;
+  --ok: #2e9e5b;
+  --track: #e3e3e3;
+  --value: #f37021;
+  --thumb: #ffffff;
+  --thumb-ring: #242424;
+  --knob-track: #dadada;
+  --knob-indicator: #ffffff;
+  --switch-off: #d9d9d9;
+  --switch-knob: #ffffff;
+  --switch-on: #f37021;
+  --switch-on-knob: #ffffff;
+  --focus-ring: #242424;
+  --scrim: #2424248c;
+  --shadow-card: 0 5px 18px rgba(36, 36, 36, 0.06);
+  --shadow-popover: 0 8px 24px rgba(36, 36, 36, 0.15);
+  --shadow-toast: 0 6px 18px rgba(0, 0, 0, 0.28);
+  --shadow-thumb: 0 1px 0 rgba(0, 0, 0, 0.18);
+  --space-1: 4px;
+  --space-1h: 6px;
+  --space-2: 8px;
+  --space-2h: 10px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-4h: 18px;
+  --space-6: 24px;
+  --radius-menu: 6px;
+  --radius-check: 6px;
+  --radius-row: 10px;
+  --radius-card-sm: 12px;
+  --radius-dialog: 14px;
+  --radius-card: 20px;
+  --radius-pill: 999px;
+  --size-row: 44px;
+  --size-row-tall: 52px;
+  --size-button: 40px;
+  --size-button-tool: 34px;
+  --size-icon-button: 36px;
+  --size-play: 46px;
+  --size-icon: 18px;
+  --size-check: 18px;
+  --size-track: 6px;
+  --size-thumb: 16px;
+  --font-sans: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #161616;
+  --surface: #242424;
+  --well: #2e2e2e;
+  --ink: #f4f4f4;
+  --ink-muted: #a3a3a3;
+  --line: #3a3a3a;
+  --divider: #333333;
+  --dash: #4a4a4a;
+  --hover: #3a3a3a;
+  --strong: #f4f4f4;
+  --on-strong: #242424;
+  --current: #f370212e;
+  --alert: #ff7a7a;
+  --warn: #f2c94c;
+  --ok: #4cc38a;
+  --track: #3a3a3a;
+  --thumb: #f4f4f4;
+  --thumb-ring: #161616;
+  --knob-track: #474747;
+  --knob-indicator: #242424;
+  --switch-off: #4a4a4a;
+  --switch-knob: #bdbdbd;
+  --focus-ring: #f4f4f4;
+  --scrim: #000000a6;
+  --shadow-card: 0 5px 18px rgba(0, 0, 0, 0.35);
+  --shadow-popover: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161616;
+    --surface: #242424;
+    --well: #2e2e2e;
+    --ink: #f4f4f4;
+    --ink-muted: #a3a3a3;
+    --line: #3a3a3a;
+    --divider: #333333;
+    --dash: #4a4a4a;
+    --hover: #3a3a3a;
+    --strong: #f4f4f4;
+    --on-strong: #242424;
+    --current: #f370212e;
+    --alert: #ff7a7a;
+    --warn: #f2c94c;
+    --ok: #4cc38a;
+    --track: #3a3a3a;
+    --thumb: #f4f4f4;
+    --thumb-ring: #161616;
+    --knob-track: #474747;
+    --knob-indicator: #242424;
+    --switch-off: #4a4a4a;
+    --switch-knob: #bdbdbd;
+    --focus-ring: #f4f4f4;
+    --scrim: #000000a6;
+    --shadow-card: 0 5px 18px rgba(0, 0, 0, 0.35);
+    --shadow-popover: 0 8px 24px rgba(0, 0, 0, 0.6);
+  }
+}
+/* 글자 스타일: font: <굵기> <크기>/<줄 높이> var(--font-sans) */
+/* dialog-title: 700 20px/28px */
+/* title: 700 18px/26px */
+/* dialog-message: 400 17px/26px */
+/* section: 700 15px/22px */
+/* list-title: 400 15px/22px */
+/* body: 400 14px/20px */
+/* label: 500 14px/20px */
+/* meta: 400 13px/18px */
+/* caption: 400 12.5px/18px */
+/* chip: 400 12px/16px */
+/* nav-caption: 400 11.5px/14px */
+
+.kv { font-family: var(--font-sans); color: var(--ink); font-size: 14px; line-height: 20px; }
+.kv *, .kv *::before, .kv *::after { box-sizing: border-box; }
+.kv-stage { background: var(--bg); padding: var(--space-4); display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.kv-col { display: flex; flex-direction: column; gap: var(--space-2); }
+.kv-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1h); }
+.kv-cap { font-size: 12.5px; line-height: 18px; color: var(--ink-muted); }
+.kv-num { font-variant-numeric: tabular-nums; }
+
+/* Focus ring (all interactive parts) */
+.kv :focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* Button: plain (default), primary, dark, ghost, danger, dashed */
+.kv-btn { height: var(--size-button); padding: 0 18px; border-radius: var(--radius-pill); border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); font: 500 14px/20px var(--font-sans); display: inline-flex; align-items: center;
+  justify-content: center; gap: var(--space-1h); cursor: pointer; white-space: nowrap; }
+.kv-btn:hover { border-color: var(--ink); }
+.kv-btn.sm { height: var(--size-button-tool); padding: 0 14px; font-size: 13px; }
+.kv-btn.primary { background: var(--accent); color: var(--on-accent); border-color: transparent; }
+.kv-btn.dark { background: var(--strong); color: var(--on-strong); border-color: transparent; }
+.kv-btn.danger { background: var(--danger); color: var(--on-danger); border-color: transparent; }
+.kv-btn.ghost { background: transparent; border-color: transparent; }
+.kv-btn.ghost:hover { background: var(--hover); }
+.kv-btn.ghost.alert { color: var(--alert); }
+.kv-btn.dashed { background: transparent; border: 1.5px dashed var(--dash); color: var(--ink-muted); border-radius: 12px; }
+.kv-btn.dashed:hover { border-color: var(--ink); color: var(--ink); background: var(--well); }
+.kv-btn.primary:hover, .kv-btn.dark:hover, .kv-btn.danger:hover { border-color: transparent; filter: brightness(0.95); }
+.kv-btn[disabled] { opacity: 0.45; cursor: default; filter: none; }
+.kv-btn svg { width: var(--size-icon); height: var(--size-icon); flex: none; }
+
+/* Icon button: round, icon only */
+.kv-icon-btn { width: var(--size-icon-button); height: var(--size-icon-button); border-radius: 50%; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+.kv-icon-btn:hover { border-color: var(--ink); }
+.kv-icon-btn.ghost { border-color: transparent; background: transparent; }
+.kv-icon-btn.ghost:hover { background: var(--hover); }
+.kv-icon-btn.primary { background: var(--accent); color: var(--on-accent); border-color: transparent; width: var(--size-play); height: var(--size-play); }
+.kv-icon-btn svg { width: var(--size-icon); height: var(--size-icon); }
+
+/* Icon set: 24 grid strokes */
+.kv-ico { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.kv-ico.filled { fill: currentColor; stroke: none; }
+
+/* Segmented control */
+.kv-seg { display: inline-flex; gap: 4px; padding: 4px; background: var(--well); border-radius: var(--radius-pill); }
+.kv-seg button { height: 32px; padding: 0 16px; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink-muted);
+  font: 500 14px/20px var(--font-sans); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.kv-seg button:hover { color: var(--ink); }
+.kv-seg button[aria-pressed="true"] { background: var(--strong); color: var(--on-strong); }
+.kv-seg.on-surface { background: var(--surface); }
+
+/* Switch */
+.kv-switch { display: inline-flex; align-items: center; gap: 9px; font: 500 14px/20px var(--font-sans); color: var(--ink); cursor: pointer; }
+.kv-switch .track { width: 36px; height: 20px; border-radius: 10px; background: var(--switch-off); position: relative; flex: none; }
+.kv-switch .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--switch-knob); box-shadow: 0 0.6px 0 rgba(0, 0, 0, 0.15); }
+.kv-switch.on .track { background: var(--switch-on); }
+.kv-switch.on .track::after { left: 18px; background: var(--switch-on-knob); box-shadow: none; }
+.kv-switch.disabled { opacity: 0.4; }
+
+/* Checkbox */
+.kv-check { display: inline-flex; align-items: center; gap: 9px; min-height: var(--size-button-tool); font: 500 14px/20px var(--font-sans); color: var(--ink); cursor: pointer; }
+.kv-check .box { width: var(--size-check); height: var(--size-check); border-radius: var(--radius-check); border: 1.5px solid var(--ink-muted);
+  background: var(--surface); display: inline-flex; align-items: center; justify-content: center; flex: none; color: var(--on-accent); }
+.kv-check:hover .box { border-color: var(--ink); }
+.kv-check .box svg { width: 14px; height: 14px; visibility: hidden; stroke-width: 2.5; }
+.kv-check.on .box, .kv-check.mixed .box { background: var(--accent); border-color: var(--accent); }
+.kv-check.on .box svg, .kv-check.mixed .box svg { visibility: visible; }
+.kv-check.disabled { opacity: 0.4; cursor: default; }
+
+/* Slider (thin) and thick variant */
+.kv-slider { position: relative; height: 28px; min-width: 120px; flex: 1; }
+.kv-slider .rail, .kv-slider .fill { position: absolute; left: 0; top: 11px; height: var(--size-track); border-radius: 3px; }
+.kv-slider .rail { right: 0; background: var(--track); }
+.kv-slider .fill { background: var(--value); }
+.kv-slider .thumb { position: absolute; top: 6px; width: var(--size-thumb); height: var(--size-thumb); margin-left: -8px; border-radius: 50%;
+  background: var(--thumb); border: 2px solid var(--thumb-ring); box-shadow: var(--shadow-thumb); }
+.kv-slider.thick { height: 34px; }
+.kv-slider.thick .rail, .kv-slider.thick .fill { top: 12px; height: 10px; border-radius: 5px; }
+.kv-slider.thick .thumb { top: 6px; width: 22px; height: 22px; margin-left: -11px; }
+.kv-slider.disabled { opacity: 0.4; }
+
+/* Knob: orange arc + orange cap + indicator */
+.kv-knob { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; }
+.kv-knob svg { width: 52px; height: 52px; }
+.kv-knob .arc-bg { fill: none; stroke: var(--knob-track); stroke-width: 5; stroke-linecap: round; }
+.kv-knob .arc { fill: none; stroke: var(--value); stroke-width: 5; stroke-linecap: round; }
+.kv-knob .cap { fill: var(--accent); }
+.kv-knob .tick { stroke: var(--knob-indicator); stroke-width: 4; stroke-linecap: round; }
+.kv-knob b { font: 700 12.5px/16px var(--font-sans); }
+.kv-knob span { font: 400 12px/16px var(--font-sans); color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+
+/* Text field, search field */
+.kv-field { display: flex; flex-direction: column; gap: 6px; }
+.kv-field label { font: 500 14px/20px var(--font-sans); }
+.kv-input { height: var(--size-button); border-radius: var(--radius-pill); border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  padding: 0 16px; font: 400 15px/20px var(--font-sans); width: 100%; }
+.kv-input::placeholder { color: var(--ink-muted); }
+.kv-input:focus { outline: none; border: 1.5px solid var(--ink); }
+.kv-input.invalid { border: 1.5px solid var(--alert); }
+.kv-note { display: flex; justify-content: space-between; font: 400 13px/18px var(--font-sans); }
+.kv-note .err { color: var(--alert); }
+.kv-note .count { color: var(--ink-muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+.kv-search { position: relative; flex: 1; min-width: 200px; }
+.kv-search svg { position: absolute; left: 14px; top: 11px; width: 18px; height: 18px; color: var(--ink-muted); }
+.kv-search .kv-input { padding-left: 42px; }
+
+/* Select (dropdown) */
+.kv-select { height: var(--size-button-tool); border-radius: var(--radius-pill); border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  font: 400 14px/20px var(--font-sans); padding: 0 34px 0 14px; display: inline-flex; align-items: center; position: relative; min-width: 96px; cursor: pointer; }
+.kv-select svg { position: absolute; right: 12px; top: 50%; width: 12px; height: 12px; margin-top: -6px; color: var(--ink-muted); }
+.kv-select:hover { border-color: var(--ink); }
+
+/* Chip */
+.kv-chip { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: var(--radius-row); background: var(--well);
+  color: var(--ink); font: 400 12px/16px var(--font-sans); white-space: nowrap; }
+.kv-chip.on-well { background: var(--surface); }
+
+/* List: 44 px rows */
+.kv-list { background: var(--surface); border-radius: var(--radius-card-sm); overflow: hidden; border: 1px solid var(--divider); min-width: 0; }
+.kv-li { height: var(--size-row); display: flex; align-items: center; gap: 10px; padding: 0 12px; border-bottom: 1px solid var(--divider); cursor: default; }
+.kv-li:last-child { border-bottom: 0; }
+.kv-li .lead { width: 26px; flex: none; display: flex; justify-content: center; color: var(--ink-muted); font: 400 13px/18px var(--font-sans); font-variant-numeric: tabular-nums; }
+.kv-li .badge { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: flex; align-items: center; justify-content: center; }
+.kv-li .badge svg { width: 10px; height: 10px; margin-left: 1px; }
+.kv-li .name { flex: 1; min-width: 0; font: 400 15px/22px var(--font-sans); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kv-li .end { color: var(--ink-muted); font: 400 13px/18px var(--font-sans); font-variant-numeric: tabular-nums; width: 44px; text-align: right; flex: none; }
+.kv-li:hover { background: color-mix(in srgb, var(--well) 55%, transparent); }
+.kv-li.selected { background: var(--well); }
+.kv-li.current { background: var(--current); }
+.kv-li.current .name { font-weight: 500; }
+.kv-li.selected .kv-chip, .kv-li.current .kv-chip { background: var(--surface); }
+.kv-li.tall { height: var(--size-row-tall); }
+.kv-li .two { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.kv-li .two small { font: 400 12px/16px var(--font-sans); color: var(--ink-muted); }
+.kv-li.drop-before { box-shadow: inset 0 3px 0 var(--accent); }
+
+/* Card */
+.kv-card { background: var(--surface); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.kv-card.sm { border-radius: var(--radius-card-sm); box-shadow: none; }
+.kv-card h3 { margin: 0; font: 700 18px/26px var(--font-sans); }
+.kv-card h4 { margin: 0; font: 700 15px/22px var(--font-sans); }
+.kv-well { background: var(--well); border-radius: var(--radius-card-sm); padding: 12px 14px; }
+
+/* Dialog */
+.kv-dialog { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-dialog); padding: 20px var(--space-6) 20px;
+  display: flex; flex-direction: column; gap: 14px; width: 440px; max-width: 100%; box-shadow: var(--shadow-popover); }
+.kv-dialog h2 { margin: 0; font: 700 20px/28px var(--font-sans); }
+.kv-dialog p { margin: 0; font: 400 17px/26px var(--font-sans); }
+.kv-dialog .actions { display: flex; justify-content: flex-end; gap: var(--space-2); flex-wrap: wrap; margin-top: 4px; }
+.kv-info { display: flex; align-items: center; gap: 10px; background: var(--well); border-radius: var(--radius-row); padding: 10px 14px; }
+.kv-info svg { width: 18px; height: 18px; flex: none; }
+.kv-info b { display: block; font: 500 15px/20px var(--font-sans); }
+.kv-info small { display: block; font: 400 13px/18px var(--font-sans); color: var(--ink-muted); }
+.kv-scrim { background: var(--scrim); padding: 28px; border-radius: 12px; display: flex; justify-content: center; }
+
+/* Toast */
+.kv-toast { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px 0 14px; border-radius: var(--radius-pill);
+  background: var(--strong); color: var(--on-strong); font: 500 15px/20px var(--font-sans); box-shadow: var(--shadow-toast); }
+.kv-toast .mark { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: none; }
+.kv-toast .mark.done { background: var(--accent); color: var(--on-accent); }
+.kv-toast .mark.warn { background: var(--warn); color: var(--on-accent); font-weight: 700; }
+.kv-toast .mark svg { width: 14px; height: 14px; }
+
+/* Menu */
+.kv-menu { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 4px; width: 260px; box-shadow: var(--shadow-popover); }
+.kv-menu .head { padding: 8px 12px 6px; font: 400 12.5px/18px var(--font-sans); color: var(--ink-muted); }
+.kv-menu .item { height: 34px; display: flex; align-items: center; gap: 8px; padding: 0 12px 0 30px; border-radius: var(--radius-menu); font: 400 14px/20px var(--font-sans); position: relative; }
+.kv-menu .item:hover, .kv-menu .item.hl { background: var(--well); }
+.kv-menu .item.danger { color: var(--alert); }
+.kv-menu .item.ticked::before { content: ""; position: absolute; left: 12px; top: 12px; width: 9px; height: 5px; border-left: 1.8px solid currentColor; border-bottom: 1.8px solid currentColor; transform: rotate(-45deg); }
+.kv-menu .item .key { margin-left: auto; color: var(--ink-muted); font-size: 12.5px; }
+.kv-menu .sep { height: 1px; background: var(--divider); margin: 4px 10px; }
+
+/* Tooltip */
+.kv-tip { display: inline-block; background: var(--strong); color: var(--on-strong); font: 400 12.5px/18px var(--font-sans); padding: 4px 8px; border-radius: 4px; max-width: 320px; }
+
+/* Window frame */
+.kv-win { width: 420px; max-width: 100%; border-radius: 10px; overflow: hidden; background: var(--bg); box-shadow: var(--shadow-popover); border: 1px solid var(--line); }
+.kv-win .titlebar { height: 32px; display: flex; align-items: center; gap: 8px; padding-left: 12px; background: var(--surface); border-bottom: 1px solid var(--divider); font: 400 12px/16px var(--font-sans); }
+.kv-win .titlebar .t { flex: 1; }
+.kv-win .titlebar .ctl { width: 44px; text-align: center; color: var(--ink); font-size: 13px; }
+.kv-win .body { padding: 14px 18px; display: flex; flex-direction: column; gap: 12px; }
+.kv-win .head h3 { margin: 0; font: 700 18px/26px var(--font-sans); }
+.kv-win .head small { font: 400 12.5px/18px var(--font-sans); color: var(--ink-muted); }
+.kv-win .tools { display: flex; align-items: center; gap: 6px; }
+.kv-win .tools .spacer { flex: 1; }
+.kv-win .status { border-top: 1px solid var(--divider); padding-top: 6px; font: 400 12.5px/18px var(--font-sans); color: var(--ink-muted); }
+
+/* Nav rail */
+.kv-rail { width: 76px; background: var(--surface); border-radius: var(--radius-card); padding: 8px 0; display: flex; flex-direction: column; gap: 2px; box-shadow: var(--shadow-card); }
+.kv-rail button { height: 56px; margin: 0 4px; border: 0; border-radius: 14px; background: transparent; color: var(--ink-muted); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px; font: 400 11.5px/14px var(--font-sans); cursor: pointer; }
+.kv-rail button:hover { background: var(--well); color: var(--ink); }
+.kv-rail button[aria-current="page"] { background: var(--accent); color: var(--on-accent); font-weight: 500; }
+.kv-rail svg { width: 20px; height: 20px; }
+
+/* Meter / progress */
+.kv-meter { display: flex; align-items: center; gap: 10px; min-width: 200px; }
+.kv-meter span { width: 60px; font: 500 12.5px/18px var(--font-sans); color: var(--ink-muted); }
+.kv-meter .bar { flex: 1; height: 6px; border-radius: 3px; background: var(--track); position: relative; overflow: hidden; }
+.kv-meter .bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--value); }
+.kv-meter .bar i.hot { background: var(--warn); }
+.kv-meter .bar i.clip { background: var(--alert); }
+
+/* Status */
+.kv-status { display: inline-flex; align-items: center; gap: 8px; font: 500 14px/20px var(--font-sans); }
+.kv-status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ink-muted); }
+.kv-status.ok::before { background: var(--ok); }
+.kv-status.warn::before { background: var(--warn); }
+.kv-status.alert::before { background: var(--alert); }
+.kv-status.warn { color: var(--warn); }
+.kv-status.alert { color: var(--alert); }
+
+/* MORTAL adapters for the supplied KVFX UI design tokens. */
+:root {
+  --pane: var(--surface);
+  --soft: var(--well);
+  --fg: var(--ink);
+  --muted: var(--ink-muted);
+  --gold: var(--ink);
+  --blue: var(--ink);
+  --green: var(--ok);
+  --red: var(--alert);
+  color-scheme: light;
+  font-family: var(--font-sans);
+}
+html[data-theme="dark"] { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); line-height: 1.6; }
+button, input, select { font: inherit; }
+button, select, summary { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+button:disabled { cursor: default; opacity: .45; }
+input:disabled { opacity: .4; }
+button, input, select, summary { touch-action: manipulation; }
+button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible,
+a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.icon { width: var(--size-icon); height: var(--size-icon); flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon-sprite, .hidden, [hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.skip-link { position: fixed; left: 16px; top: -100px; z-index: 10; padding: 12px 16px; border-radius: var(--radius-pill); background: var(--strong); color: var(--on-strong); }
+.skip-link:focus { top: 16px; }
+#app { max-width: 1360px; margin: auto; padding: var(--space-6) clamp(16px, 3vw, 40px) 64px; }
+.hero, .side, .toolbox, .year { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--radius-card); box-shadow: var(--shadow-card); }
+.hero { padding: var(--space-6); }
+.topline, .brand, .tabs, .btnrow, .filters, .cardmeta, .progressmeta { display: flex; align-items: center; }
+.topline { justify-content: space-between; gap: var(--space-3); }
+.brand { gap: var(--space-2h); }
+.brand-mark { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: var(--radius-row); background: var(--accent); color: var(--on-accent); }
+.eyebrow { color: var(--ink-muted); font-size: 12px; font-weight: 500; letter-spacing: .06em; }
+h1 { font-size: clamp(28px, 3vw, 36px); line-height: 1.35; letter-spacing: -.045em; margin: 20px 0 8px; font-weight: 700; }
+h1 i { font-size: .65em; font-style: normal; vertical-align: middle; color: var(--ink-muted); margin-left: 6px; }
+.hero-subtitle { margin: 0 0 8px; font-size: 18px; font-weight: 500; letter-spacing: -.02em; }
+.lead, .muted, .sub { color: var(--ink-muted); }
+.lead { max-width: 690px; font-size: 14px; line-height: 22px; margin: 0; }
+.sub { font-size: 12.5px; line-height: 18px; }
+.hero-bottom { display: grid; grid-template-columns: 1fr minmax(240px, 320px); gap: var(--space-6); align-items: end; margin-top: 24px; }
+.route-label { display: block; margin-bottom: 8px; font-size: 12.5px; color: var(--ink-muted); }
+.tabs { gap: 4px; padding: 4px; width: fit-content; border-radius: var(--radius-pill); background: var(--well); }
+.tab, .chip { border: 0; border-radius: var(--radius-pill); color: var(--ink-muted); background: transparent; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: var(--size-button-tool); padding: 6px 16px; font-weight: 500; }
+.tab { min-width: 132px; min-height: var(--size-button); font-size: 14px; }
+.tab:hover, .chip:hover { color: var(--ink); background: var(--hover); }
+.tab[aria-selected="true"], .filters .chip[aria-pressed="true"] { background: var(--strong); color: var(--on-strong); }
+.route-copy { margin: 10px 0 0; }
+.progress-panel { background: var(--well); border-radius: var(--radius-card-sm); padding: var(--space-4); }
+.progressmeta { justify-content: space-between; gap: 12px; }
+.num { font-size: 24px; line-height: 28px; font-weight: 700; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.meter { height: var(--size-track); border-radius: var(--radius-pill); background: var(--track); overflow: hidden; margin: 12px 0 10px; }
+.bar { height: 100%; width: 0; border-radius: inherit; background: var(--accent); transition: width .16s ease; }
+#percent { font-variant-numeric: tabular-nums; }
+.notice { display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--divider); border-radius: var(--radius-card-sm); background: var(--well); padding: 12px 16px; margin: 16px 0; color: var(--ink-muted); font-size: 12.5px; line-height: 20px; }
+.notice > .icon { margin-top: 1px; color: var(--warn); }
+.notice strong { color: var(--ink); font-weight: 500; }
+#alert { color: var(--alert); border-color: var(--alert); }
+.layout { display: grid; grid-template-columns: 224px minmax(0, 1fr); gap: var(--space-6); align-items: start; margin-top: 24px; }
+.side { position: sticky; top: 16px; padding: var(--space-4); }
+.side h2 { font-size: 12.5px; line-height: 18px; font-weight: 500; color: var(--ink-muted); margin: 0 0 12px; }
+.navyears { display: grid; gap: 4px; }
+.navyears .chip { position: relative; width: 100%; min-height: 40px; padding: 8px 12px; border-radius: var(--radius-row); justify-content: flex-start; color: var(--ink-muted); font-size: 13px; }
+.navyears .chip[aria-pressed="true"] { background: var(--current); color: var(--ink); }
+.navyears .chip[aria-pressed="true"]::before { content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 3px; border-radius: 3px; background: var(--accent); }
+.year-count { margin-left: auto; font-size: 12px; font-weight: 400; font-variant-numeric: tabular-nums; color: var(--ink-muted); }
+.side hr { border: 0; border-top: 1px solid var(--divider); margin: 20px 0; }
+.btn { min-height: var(--size-button); padding: 8px 16px; border: 1px solid var(--line); border-radius: var(--radius-pill); display: inline-flex; gap: 8px; align-items: center; justify-content: center; background: var(--surface); color: var(--ink); font-size: 14px; line-height: 20px; font-weight: 500; }
+.btn:hover { border-color: var(--ink); }
+.btn.ghost { background: transparent; border-color: transparent; }
+.btn.ghost:hover { background: var(--hover); }
+.btn.primary { background: var(--accent); color: var(--on-accent); border-color: transparent; }
+.btn.danger { background: var(--danger); color: var(--on-danger); border-color: transparent; }
+.btn.danger-text { color: var(--alert); }
+.side .btn { width: 100%; justify-content: flex-start; margin-top: 6px; font-size: 13px; }
+.side .tip { margin: 12px 4px 0; }
+.select-wrap { position: relative; }
+.select-wrap > .icon { position: absolute; right: 12px; top: 13px; width: 14px; height: 14px; pointer-events: none; color: var(--ink-muted); }
+.select-wrap select { appearance: none; -webkit-appearance: none; padding-right: 32px; font-size: 12.5px; }
+.operation-feedback { margin: 12px 4px 0; color: var(--alert); overflow-wrap: anywhere; }
+.main { min-width: 0; }
+.toolbox { padding: 20px; }
+.toolbox-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.toolbox-head label { font-size: 15px; line-height: 22px; font-weight: 700; }
+.search-wrap { position: relative; }
+.search-wrap > .icon { position: absolute; left: 16px; top: 13px; color: var(--ink-muted); pointer-events: none; }
+.search { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--surface); color: var(--ink); padding: 10px 16px; font-size: 14px; line-height: 20px; }
+.search::placeholder { color: var(--ink-muted); opacity: 1; }
+.search:hover { border-color: var(--ink-muted); }
+.search:focus { border-color: var(--ink); }
+.search-wrap .search { padding-left: 44px; padding-right: 48px; }
+.search-key { position: absolute; right: 16px; top: 12px; min-width: 20px; height: 20px; border: 1px solid var(--line); border-radius: 6px; text-align: center; color: var(--ink-muted); font: 400 12px/18px var(--font-sans); pointer-events: none; }
+.search-wrap:focus-within .search-key { display: none; }
+.search-wrap:focus-within .search { padding-right: 16px; }
+.filter-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+.filter-label { font-size: 12.5px; color: var(--ink-muted); }
+.filters { gap: 4px; background: var(--well); border-radius: var(--radius-pill); padding: 4px; width: fit-content; }
+.filters .chip { font-size: 13px; min-width: 56px; padding: 6px 14px; }
+.switches { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--divider); }
+.switches label { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; color: var(--ink-muted); font-size: 12.5px; cursor: pointer; }
+.switches input { appearance: none; -webkit-appearance: none; position: relative; width: 36px; height: 20px; margin: 0; flex: none; border: 0; border-radius: var(--radius-pill); background: var(--switch-off); cursor: pointer; }
+.switches input::before { content: ""; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--switch-knob); transition: transform .12s ease; }
+.switches input:checked { background: var(--switch-on); }
+.switches input:checked::before { transform: translateX(16px); background: var(--switch-on-knob); box-shadow: 0 0 0 1px var(--thumb-ring); }
+.resultline { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0 12px; color: var(--ink-muted); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.resultline .btn { min-height: 34px; padding: 6px 12px; font-size: 12.5px; }
+#timeline { scroll-margin-top: 16px; }
+.year { overflow: hidden; margin-bottom: 16px; }
+.year > summary { cursor: pointer; padding: 18px 20px; display: flex; align-items: center; gap: 12px; list-style: none; min-height: 64px; }
+.year > summary:hover { background: var(--well); }
+summary::-webkit-details-marker { display: none; }
+.year strong { font-size: 18px; line-height: 26px; font-weight: 700; letter-spacing: -.025em; }
+.year-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: var(--radius-row); background: var(--well); color: var(--ink-muted); font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.year-meta { margin-left: auto; font-variant-numeric: tabular-nums; }
+.year > summary > .icon { width: 16px; height: 16px; color: var(--ink-muted); }
+.year[open] > summary > .icon { transform: rotate(180deg); }
+.year .inner { border-top: 1px solid var(--divider); padding: 0 16px 8px; }
+.month { display: flex; align-items: center; gap: 12px; font-size: 12.5px; font-weight: 500; line-height: 18px; color: var(--ink-muted); padding: 20px 4px 0; margin: 0 0 12px; }
+.month::after { content: ""; height: 1px; flex: 1; background: var(--divider); }
+.row { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; margin-bottom: 12px; }
+.check { position: relative; display: flex; justify-content: center; align-items: flex-start; min-height: 44px; padding-top: 20px; cursor: pointer; }
+.check input { position: absolute; top: 20px; width: 18px; height: 18px; margin: 0; opacity: 0; }
+.check-box { width: var(--size-check); height: var(--size-check); border: 1.5px solid var(--ink-muted); border-radius: var(--radius-check); display: flex; align-items: center; justify-content: center; background: var(--surface); pointer-events: none; }
+.check-box .icon { width: 14px; height: 14px; visibility: hidden; }
+.check:hover .check-box { border-color: var(--ink); }
+.check input:checked + .check-box { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.check input:checked + .check-box .icon { visibility: visible; }
+.check input:focus-visible { outline: none; }
+.check input:focus-visible + .check-box { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+.event { position: relative; min-width: 0; border: 1px solid var(--divider); border-left: 3px solid var(--line); border-radius: var(--radius-card-sm); background: var(--surface); overflow: hidden; scroll-margin-top: 16px; }
+.event.required { border-left-color: var(--ink-muted); }
+.event[open] { border-left-color: var(--accent); }
+.event.done { background: var(--well); }
+.event.done .ename { color: var(--ink-muted); text-decoration: line-through; }
+.event > summary { position: relative; list-style: none; padding: 16px; cursor: pointer; }
+.event > summary:hover { background: var(--well); }
+.event > summary:focus-visible, .year > summary:focus-visible { outline-offset: -4px; }
+.cardmeta { flex-wrap: wrap; gap: 6px 8px; color: var(--ink-muted); font-size: 12px; line-height: 18px; }
+.cardmeta:first-child { padding-right: 24px; }
+.date { font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.flag { display: inline-flex; align-items: center; gap: 4px; border-radius: var(--radius-row); padding: 2px 8px; background: var(--well); color: var(--ink-muted); font-size: 11.5px; line-height: 16px; font-weight: 400; }
+.flag.required { background: var(--strong); color: var(--on-strong); }
+.flag.verify { background: transparent; color: var(--warn); padding-left: 0; }
+.flag .icon { width: 13px; height: 13px; }
+.ename { font-size: 15px; line-height: 22px; font-weight: 700; margin: 10px 0 6px; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.cond { color: var(--ink-muted); font-size: 13px; line-height: 20px; margin: 0 0 12px; overflow-wrap: anywhere; }
+.route-tag { background: var(--well); border-radius: var(--radius-menu); padding: 1px 6px; color: var(--ink-muted); font-size: 11.5px; }
+.hint { margin-left: auto; color: var(--ink-muted); white-space: nowrap; }
+.hint-open { display: none; }
+.event[open] .hint-closed { display: none; }
+.event[open] .hint-open { display: inline; }
+.event-chevron { position: absolute; top: 18px; right: 16px; width: 16px; height: 16px; color: var(--ink-muted); transition: transform .12s ease; }
+.event[open] .event-chevron { transform: rotate(180deg); }
+.detail { border-top: 1px solid var(--divider); padding: 20px; overflow-wrap: anywhere; }
+.detail h4 { color: var(--ink); font-size: 13px; line-height: 20px; font-weight: 700; margin: 20px 0 6px; }
+.detail h4:first-child { margin-top: 0; }
+.detail ul, .detail ol { padding-left: 20px; margin: 6px 0; font-size: 14px; line-height: 22px; }
+.detail li { margin: 6px 0; }
+.detail p { margin: 6px 0; font-size: 13px; line-height: 22px; }
+.deps { display: flex; flex-wrap: wrap; gap: 8px; }
+.deps button { padding: 8px 12px; min-height: 34px; border-radius: var(--radius-pill); border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 12.5px; text-align: left; }
+.deps button:hover { background: var(--well); border-color: var(--ink-muted); }
+.deps .yes { color: var(--ink); }
+.deps .no { color: var(--ink-muted); }
+.warning { border: 1px solid var(--line); border-radius: var(--radius-row); background: var(--well); padding: 12px; font-size: 12.5px; line-height: 20px; margin-top: 16px; }
+.warning strong { color: var(--warn); font-weight: 500; }
+.empty { border: 1px dashed var(--dash); border-radius: var(--radius-card); padding: 40px 20px; text-align: center; color: var(--ink-muted); font-size: 14px; }
+.foot { margin-top: 32px; border-top: 1px solid var(--divider); padding-top: 20px; color: var(--ink-muted); font-size: 12px; line-height: 20px; }
+.m-prep { border: 1px solid var(--divider); border-radius: var(--radius-card-sm); background: var(--well); padding: 16px; margin-bottom: 20px; display: grid; gap: 12px; }
+.detail .m-prep-title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; margin: 0; }
+.m-prep-section { border-top: 1px solid var(--line); padding-top: 12px; }
+.m-prep-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; align-items: start; margin-top: 6px; }
+.m-prep-name { font-size: 14px; font-weight: 500; line-height: 22px; }
+.m-prep-date, .m-prep-subtle { font-size: 12.5px; line-height: 20px; color: var(--ink-muted); }
+.m-prep-notes { padding-left: 20px; margin: 8px 0 0; font-size: 13px; }
+.m-prep-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.m-help { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 6px 12px; border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--surface); color: var(--ink); font-weight: 500; font-size: 12.5px; line-height: 20px; text-align: left; white-space: normal; }
+.m-help:hover { border-color: var(--ink); background: var(--hover); }
+.m-help .icon { width: 14px; height: 14px; }
+.m-help-inline { margin: 6px 6px 0 0; font-size: 12px; background: transparent; }
+.m-source { color: var(--ink); font-size: 13px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.m-source:hover { text-decoration-thickness: 2px; }
+.m-dialog, .action-dialog { color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-dialog); box-shadow: var(--shadow-popover); width: min(600px, calc(100% - 32px)); max-height: 85vh; max-height: 85dvh; overflow: auto; padding: 0; }
+.m-dialog::backdrop, .action-dialog::backdrop { background: var(--scrim); }
+.m-dialog-top { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 20px 24px 16px; background: var(--surface); border-bottom: 1px solid var(--divider); z-index: 1; }
+.m-dialog-top h2, .action-dialog h2 { font-size: 20px; line-height: 28px; font-weight: 700; letter-spacing: -.025em; margin: 6px 0 0; }
+.m-dialog-body { padding: 8px 24px 24px; }
+.m-dialog-body h3 { font-size: 15px; line-height: 22px; margin: 24px 0 8px; }
+.m-dialog-body p, .m-dialog-body li { font-size: 14px; line-height: 24px; }
+.m-dialog-body ol { padding-left: 20px; }
+.m-dialog-body li { margin: 8px 0; }
+.m-dialog-note { border: 1px solid var(--divider); border-radius: var(--radius-row); background: var(--well); padding: 12px 16px; font-size: 14px; line-height: 24px; white-space: pre-wrap; }
+.m-dialog-close { display: inline-flex; justify-content: center; align-items: center; width: 36px; height: 36px; min-width: 36px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--ink); }
+.m-dialog-close:hover { background: var(--hover); }
+.action-dialog { width: min(440px, calc(100% - 32px)); padding: 24px; }
+.action-dialog h2 { margin: 0; }
+.action-dialog p { font-size: 15px; line-height: 26px; color: var(--ink-muted); margin: 12px 0 24px; white-space: pre-line; }
+.dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 20; display: flex; align-items: center; gap: 10px; max-width: calc(100% - 32px); padding: 12px 18px; border-radius: var(--radius-pill); background: var(--strong); color: var(--on-strong); font-size: 14px; line-height: 22px; box-shadow: var(--shadow-toast); pointer-events: none; }
+.toast > .icon { background: var(--accent); color: var(--on-accent); border-radius: 50%; padding: 2px; width: 22px; height: 22px; }
+#printView { display: none; }
+@media (min-width: 1100px) {
+  .hero { display: grid; grid-template-columns: minmax(240px, .9fr) minmax(540px, 1.1fr); gap: 20px 24px; }
+  .topline { grid-column: 1 / -1; }
+  .hero-intro { align-self: center; }
+  .hero-intro h1 { margin-top: 0; }
+  .hero-intro .lead { font-size: 13px; }
+  .hero-bottom { margin-top: 0; grid-template-columns: minmax(0, 1fr) minmax(220px, 260px); gap: 16px; align-items: center; }
+  .hero-bottom .tabs { width: 100%; }
+  .hero-bottom .tab { flex: 1; min-width: 0; padding: 6px 12px; }
+}
+@media (max-width: 950px) {
+  .layout { grid-template-columns: 1fr; gap: 16px; }
+  .side { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+  .side-section:first-child { grid-column: 1 / -1; }
+  .side hr { display: none; }
+  .side h2 { margin-bottom: 8px; }
+  .navyears { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .navyears .chip { justify-content: center; gap: 6px; padding: 8px; }
+  .navyears .icon { display: none; }
+  .year-count { margin-left: 0; }
+  .side .btn { width: auto; margin-right: 4px; }
+  .side .tip { max-width: 300px; }
+  .select-wrap { max-width: 240px; }
+}
+@media (max-width: 600px) {
+  #app { padding: 12px 12px 40px; }
+  .hero { padding: 20px 16px; }
+  .brand { gap: 8px; }
+  .brand .eyebrow { font-size: 11.5px; letter-spacing: 0; }
+  .brand-mark { width: 32px; height: 32px; }
+  #theme { min-height: 40px; padding: 8px 10px; font-size: 12px; gap: 6px; }
+  h1 { margin-top: 20px; font-size: 28px; }
+  .hero-subtitle { font-size: 17px; }
+  .lead { font-size: 13px; line-height: 22px; }
+  .hero-bottom { grid-template-columns: 1fr; gap: 16px; margin-top: 20px; }
+  .tabs { width: 100%; }
+  .tab { flex: 1; min-width: 0; min-height: 44px; }
+  .progress-panel { padding: 12px 16px; }
+  .notice { padding: 12px; }
+  .side { padding: 16px; grid-template-columns: 1fr; gap: 20px; }
+  .side-section:first-child { grid-column: auto; }
+  .navyears .chip { min-height: 44px; font-size: 12px; padding: 8px 4px; }
+  .navyears .year-count { display: none; }
+  .side .btn, .m-help, .deps button, .resultline .btn, .dialog-actions .btn { min-height: 44px; }
+  .side .tip { margin-top: 8px; }
+  .side-section { min-width: 0; }
+  .select-wrap { max-width: 100%; }
+  .toolbox { padding: 16px; }
+  .toolbox-head .sub { display: none; }
+  .search-key { display: none; }
+  .search { font-size: 16px; }
+  .select-wrap select { font-size: 16px; }
+  .search-wrap .search { padding-right: 16px; }
+  .filter-row { gap: 8px; flex-wrap: wrap; }
+  .filters { max-width: 100%; flex: 1; }
+  .filters .chip { flex: 1; min-width: 0; min-height: 40px; padding: 8px 10px; }
+  .switches { gap: 4px 16px; }
+  .switches label { min-height: 44px; }
+  .year > summary { padding: 16px 12px; gap: 8px; }
+  .year-meta { font-size: 12px; }
+  .year .inner { padding: 0 8px 4px; }
+  .row { grid-template-columns: 28px minmax(0, 1fr); gap: 4px; }
+  .event > summary { padding: 12px; }
+  .event-chevron { top: 16px; right: 12px; }
+  .date { flex-basis: 100%; }
+  .ename { margin-top: 8px; }
+  .hint { font-size: 11.5px; }
+  .detail { padding: 16px 12px; }
+  .m-prep { padding: 12px; }
+  .m-dialog-top { padding: 16px; }
+  .m-dialog-body { padding: 8px 16px 20px; }
+  .m-dialog-close { width: 44px; height: 44px; min-width: 44px; }
+  .action-dialog { padding: 20px; }
+  .dialog-actions .btn { flex: 1; }
+  .toast { bottom: 16px; width: max-content; border-radius: var(--radius-dialog); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media (forced-colors: active) {
+  .check input { opacity: 1; appearance: auto; }
+  .check-box { visibility: hidden; }
+  .switches input { appearance: auto; width: 20px; }
+  .switches input::before { display: none; }
+  .tab[aria-selected="true"], .chip[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -2px; }
+}
+@page { size: A4; margin: 14mm; }
+@media print {
+  html, body { background: #fff !important; color: #111 !important; }
+  #app, .skip-link, dialog, .toast { display: none !important; }
+  #printView { display: block !important; font-family: "Malgun Gothic", sans-serif; font-size: 9pt; }
+  .pr-year { font-size: 16pt; border-bottom: 1px solid #777; break-after: avoid; }
+  .pr-month { font-size: 12pt; break-after: avoid; }
+  .pr-card { border: 1px solid #ccc; border-radius: 3mm; padding: 3mm 4mm; margin-bottom: 4mm; break-inside: avoid; }
+  .pr-card h4 { font-size: 11pt; margin: 2mm 0; }
+  .pr-card p, .pr-card li { margin: 1mm 0; }
+  .pr-card ul, .pr-card ol { padding-left: 6mm; margin: 1mm 0; }
+  .pr-card strong { font-size: 9pt; }
+  .pr-caption { font-size: 9pt; color: #555; }
+}
+
+</style></head><body class="kv"><svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><symbol id="ui-layers" viewBox="0 0 24 24"><path d="M12 2 L22 7 L12 12 L2 7 Z M2 17 L12 22 L22 17 M2 12 L12 17 L22 12" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-calendar" viewBox="0 0 24 24"><path d="M5 4 L19 4 Q21 4 21 6 L21 20 Q21 22 19 22 L5 22 Q3 22 3 20 L3 6 Q3 4 5 4 Z M16 2 L16 6 M8 2 L8 6 M3 10 L21 10" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-download" viewBox="0 0 24 24"><path d="M21 15 L21 19 Q21 21 19 21 L5 21 Q3 21 3 19 L3 15 M7 10 L12 15 L17 10 M12 15 L12 3" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-upload" viewBox="0 0 24 24"><path d="M21 15 L21 19 Q21 21 19 21 L5 21 Q3 21 3 19 L3 15 M17 8 L12 3 L7 8 M12 3 L12 15" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-reset" viewBox="0 0 24 24"><path d="M3 12 A9 9 0 1 0 12 3 A9.75 9.75 0 0 0 5.26 5.74 L3 8 M3 3 L3 8 L8 8" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-printer" viewBox="0 0 24 24"><path d="M6 9 L6 2 L18 2 L18 9 M6 18 L4 18 Q2 18 2 16 L2 11 Q2 9 4 9 L20 9 Q22 9 22 11 L22 16 Q22 18 20 18 L18 18 M6 14 L18 14 L18 22 L6 22 Z" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-sun" viewBox="0 0 24 24"><path d="M12 8 A4 4 0 1 0 12 16 A4 4 0 1 0 12 8 Z M12 2 L12 4 M12 20 L12 22 M4.93 4.93 L6.34 6.34 M17.66 17.66 L19.07 19.07 M2 12 L4 12 M20 12 L22 12 M6.34 17.66 L4.93 19.07 M19.07 4.93 L17.66 6.34" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-moon" viewBox="0 0 24 24"><path d="M12 3 A6 6 0 0 0 21 12 A9 9 0 1 1 12 3 Z" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-search" viewBox="0 0 24 24"><path d="M11 4 A7 7 0 1 0 11 18 A7 7 0 1 0 11 4 Z M21 21 L16 16" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-chevron" viewBox="0 0 24 24"><path d="M6 9 L12 15 L18 9" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-check" viewBox="0 0 24 24"><path d="M20 6 L9 17 L4 12" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-close" viewBox="0 0 24 24"><path d="M18 6 L6 18 M6 6 L18 18" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-info" viewBox="0 0 24 24"><path d="M12 2 A10 10 0 1 0 12 22 A10 10 0 1 0 12 2 Z M12 16 L12 12 M12 8 L12.01 8" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-warning" viewBox="0 0 24 24"><path d="M10.29 3.86 L1.82 18 A2 2 0 0 0 3.53 21 L20.47 21 A2 2 0 0 0 22.18 18 L13.71 3.86 A2 2 0 0 0 10.29 3.86 Z M12 9 L12 13 M12 17 L12.01 17" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-external" viewBox="0 0 24 24"><path d="M15 3 L21 3 L21 9 M10 14 L21 3 M18 13 L18 19 Q18 21 16 21 L5 21 Q3 21 3 19 L3 8 Q3 6 5 6 L11 6" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-help" viewBox="0 0 24 24"><path d="M12 2 A10 10 0 1 0 12 22 A10 10 0 1 0 12 2 Z M9.09 9 A3 3 0 0 1 14.92 10 C14.92 12 11.92 13 11.92 13 M12 17 L12.01 17" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="ui-user" viewBox="0 0 24 24"><path d="M19 21 L19 19 A4 4 0 0 0 15 15 L9 15 A4 4 0 0 0 5 19 L5 21 M12 3 A4 4 0 1 0 12 11 A4 4 0 1 0 12 3 Z" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol></svg><a class="skip-link" href="#routePanel">이벤트 목록으로 이동</a>
 <script id="data" type="application/json">{"metadata":{"title":"활협전 《공동신위》 스포일러 없는 공략 데이터","edition":"2026-10-23, 현재 대화 기반 초안","scope":"욱죽·우소매 / 1~4년차 / 이벤트 발생 조건 / 스탯 / 행동 순서","primary_source":"이 대화에서 어시스턴트가 앞서 안내한 내용","source_validation":"공식 패치노트·게임 스크립트·공략 원문과 대조하지 않은 2차 재구성. 웹 검증 전 사실 확정 금지.","spoiler_policy":"스토리, 결말, 사건 원인, 캐릭터 운명, 상대의 정체 공개 금지.","update_baseline":"2026-10-20 패치 언급이 포함되어 있으나 실제 빌드 버전과 상세 조건은 재검증 필요.","route_values":{"common":"공통","yukjuk":"욱죽","usomae":"우소매"},"importance_values":{"required":"필수(이전 대화 주장)","recommended":"추천","optional":"선택"},"verification_values":["수치·분기 독립검증 필요","원문 확인","패치 버전 확인"]},"events":[{"id":"C101","year":1,"month":4,"phase":"상순","route":"common","importance":"optional","title":"남제자방 초기 특별 이벤트","place":"남제자방","requirements":["첫 정기 시험 전","심상 30 미만 권장(이전 답변에 30 이하 표기 공존)","판정 주사위 60 초과"],"actions":["남제자방에서 대사형 만나기","관련 선택지에서 「금기서화」와 견갑 관련 답변 선택"],"avoid":["다른 답변을 고르면 아이템을 놓칠 수 있음"],"depends_on":[],"note":"심상 경계값 30 포함 여부 미확인. 추가 장비 분기용이며 결연 필수 아님.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"선택","date_label":"1년차 4월 상순","conflict_review_required":true},{"id":"C102","year":1,"month":4,"phase":"하순","route":"common","importance":"optional","title":"엽씨 남매 첫 인연","place":"사사형 관련 자동 이벤트","requirements":["사사형 호감도 15 이상(1.5성으로 기재됨)"],"actions":["소 구매 및 약 관련 이벤트에서 도움을 주는 선택"],"avoid":[],"depends_on":[],"note":"이전 답변에서는 4월 하순으로 기재. 실제 고정 날짜 여부 재검증 필요.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"선택","date_label":"1년차 4월 하순","conflict_review_required":false},{"id":"C103","year":1,"month":5,"phase":"상순 이후","route":"common","importance":"optional","title":"사사형 구슬치기 해금","place":"사사형 상점 → 남제자방","requirements":["1년차 5월 상순 이후","사사형 상점 누적 5,000냥 소비","사사형·주인공이 모두 당문에 있음"],"actions":["판매 관련 최초 시연을 본다","남제자방에서 사사형에게 말을 건다","이후 회당 200냥으로 진행"],"avoid":[],"depends_on":[],"note":"선택 수집품: 30~59점 2회, 60~99점 2회 관련 보상(검증 필요).","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"선택","date_label":"1년차 5월 상순 이후","conflict_review_required":false},{"id":"C104","year":1,"month":8,"phase":"상순~2년차 1월 하순","route":"common","importance":"optional","title":"엽씨 남매 후속 인연","place":"대문 → 외출 → 객잔","requirements":["삼사형 호감도 25 이상 또는 강호쾌보 3부 이상 구매","명성 10 이상"],"actions":["사전 대화가 뜨면 1개월 안에 대문 외출","객잔에서 인연을 유지하는 선택"],"avoid":["사전 대화 이후 한 달을 넘기지 않기"],"depends_on":["C102"],"note":"이전 답변에서 8월 상순으로 표현된 발생 창은 검증 필요.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"선택","date_label":"1년차 8월 상순~2년차 1월 하순","conflict_review_required":false},{"id":"C105","year":1,"month":8,"phase":"이후","route":"common","importance":"optional","title":"엽운주 상급 목검","place":"외성","requirements":["엽씨 남매가 당문에 체류"],"actions":["외성에서 관련 제작 상호작용 총 3회 진행"],"avoid":[],"depends_on":["C104"],"note":"후속 제작 관련 추가 아이템. 결연 필수 아님.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"선택","date_label":"1년차 8월 이후","conflict_review_required":false},{"id":"C106","year":1,"month":9,"phase":"중순 이후","route":"common","importance":"recommended","title":"이부귀·복온 인연","place":"대문 → 외출","requirements":["관련 사건 또는 인물 만남 조건(정확한 트리거 재확인)"],"actions":["이부귀·복온과 인연 형성","이부귀·개방 호감도 확보 시작"],"avoid":[],"depends_on":[],"note":"서무림맹 경로를 함께 목표로 할 때 추천.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"추천","date_label":"1년차 9월 중순 이후","conflict_review_required":false},{"id":"C107","year":1,"month":10,"phase":"~12월","route":"common","importance":"recommended","title":"남궁천 인연 준비","place":"당문 및 12월 관련 이벤트","requirements":["10월 선물 선택 경로(이사형 쪽 권장으로 안내된 적 있음)"],"actions":["12월 관련 행사에서 남궁천을 돕는 선택","인물 관계 화면 등록 확인"],"avoid":[],"depends_on":[],"note":"관계 등록 여부가 후속 공동파 추가 이벤트에 중요할 수 있음.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"추천","date_label":"1년차 10월 ~12월","conflict_review_required":false},{"id":"C108","year":1,"month":12,"phase":"~2년차 초","route":"common","importance":"recommended","title":"공동파 유학 전 육성 점검","place":"당문","requirements":["전투 생존 능력, 무공·장비 준비","선택 콘텐츠 목표에 따라 의술·경공 등 육성"],"actions":["공동파 유학 전 별도 저장본 생성"],"avoid":[],"depends_on":[],"note":"행동 횟수는 유학 중 새로 주어지는 자원이며 1년차에 미리 적립한다는 의미는 아님.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"추천","date_label":"1년차 12월 ~2년차 초","conflict_review_required":false},{"id":"C201","year":2,"month":2,"phase":"상순","route":"common","importance":"required","title":"공동파 유학 선택","place":"당문 회의","requirements":[],"actions":["공동파 유학을 선택"],"avoid":["다른 유학 경로 선택 시 신규 루트 진행에 영향"],"depends_on":[],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"필수(이전 대화 주장)","date_label":"2년차 2월 상순","conflict_review_required":false},{"id":"Y201","year":2,"month":3,"phase":"상순","route":"yukjuk","importance":"recommended","title":"철권항 방문 및 욱죽 인연","place":"철권항","requirements":["공동파에 도착"],"actions":["철권항을 방문해 욱죽 인연 시작","이후 철권항을 반복 방문"],"avoid":[],"depends_on":["C201"],"note":"철권문 가입은 추가 스토리 접근에 권장되나 결연 자체의 필수 여부는 확인되지 않음.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"추천","date_label":"2년차 3월 상순","conflict_review_required":false},{"id":"U201","year":2,"month":3,"phase":"상순~중순","route":"usomae","importance":"recommended","title":"비천각 수련 및 우소매 인연","place":"비천각","requirements":["공동파에 도착"],"actions":["비천각 수련","달리기 제안 수락","가능하면 2회 이상 반복"],"avoid":[],"depends_on":["C201"],"note":"비천문 가입은 추가 이벤트용 권장. 결연 필수 여부와 구분.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"추천","date_label":"2년차 3월 상순~중순","conflict_review_required":false},{"id":"C202","year":2,"month":3,"phase":"중순","route":"common","importance":"recommended","title":"서생 인연","place":"공동파 전투 이벤트","requirements":["삼색 전대 관련 전투 도달"],"actions":["적을 즉시 처치하지 않고 8회합 전후까지 버티기","인물 관계 화면 확인"],"avoid":["정확한 등장 회합은 미검증"],"depends_on":["C201"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"추천","date_label":"2년차 3월 중순","conflict_review_required":false},{"id":"Y202","year":2,"month":3,"phase":"하순","route":"yukjuk","importance":"optional","title":"철권항 3회 방문 후속","place":"철권항","requirements":["철권항 누적 3회 이상 방문"],"actions":["철권항 방문 후 추가 이벤트 확인","추가 인연을 원하면 가운데 추격 경로 선택"],"avoid":[],"depends_on":["Y201"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 3월 하순","conflict_review_required":false},{"id":"U202","year":2,"month":3,"phase":"하순","route":"usomae","importance":"optional","title":"비천각 충돌·특수 지역 해금","place":"비천각 → 별도 지역","requirements":["비천문 가입 및 수련/달리기 선행 이벤트(정확한 필요 개수 미검증)"],"actions":["비천각 수련 반복","충돌 관련 후속 선택 진행","지도에 특수 지역(학애)이 열렸는지 확인"],"avoid":[],"depends_on":["U201"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"선택","date_label":"2년차 3월 하순","conflict_review_required":false},{"id":"C203","year":2,"month":4,"phase":"상순","route":"common","importance":"optional","title":"공동파 탐험대 결성","place":"비천각","requirements":["우소매와 인연, 호감도 20 이상(2성)","서생·남궁천과 인연","우소매·서생·남궁천 호감도 합계 7성 이상이라는 후속 수정 조건"],"actions":["비천각에서 우소매 대화","수련/단조를 반복하면 탐험대 이벤트가 무작위 발생"],"avoid":[],"depends_on":["C107","C202"],"note":"이전 답변에는 서생·남궁천 각각 10 이상 조건이 있었으나 이후 합계 7성으로 정정. 결연 필수 아님.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"선택","date_label":"2년차 4월 상순","conflict_review_required":true},{"id":"C204","year":2,"month":4,"phase":"상순~중순","route":"common","importance":"required","title":"욱죽 관련 4월 공통 연속 이벤트","place":"철권항","requirements":["욱죽 호감도 20 이상","철권항 누적 4회 이상 방문","남은 행동 최소 2회"],"actions":["철권항 선택","후속 관련 선택지와 연속 일정을 완료"],"avoid":["4월에 놓치면 5월 하순~6월 하순 재발생 여부 확인"],"depends_on":["C201"],"note":"기존 답변은 두 결연 루트의 필수 공통 조건으로 표시. 실제 우소매 루트 필수 여부는 추가 검증 대상.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"필수(이전 대화 주장)","date_label":"2년차 4월 상순~중순","conflict_review_required":true},{"id":"Y203","year":2,"month":5,"phase":"하순","route":"yukjuk","importance":"optional","title":"철권문 계절 시험 보상 A","place":"철권문 시험","requirements":["철권문 소속","계절 시험 참가"],"actions":["대련 모두 승리"],"avoid":[],"depends_on":[],"note":"추가 무공/보상 조건. 결연 필수 아님.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 5월 하순","conflict_review_required":false},{"id":"Y204","year":2,"month":5,"phase":"하순","route":"yukjuk","importance":"optional","title":"철권문 계절 시험 보상 B","place":"철권문 시험","requirements":["철권문 소속","앞선 두 전투 승리"],"actions":["마지막 대련 상대를 서생으로 선택","10회합 버텨 무승부"],"avoid":[],"depends_on":[],"note":"보상 A와 결과가 달라질 수 있어 분기 전 저장 추천.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 5월 하순","conflict_review_required":false},{"id":"C205","year":2,"month":5,"phase":"하순~6월 하순","route":"common","importance":"required","title":"4월 연속 이벤트 보완 기회","place":"철권항","requirements":["C204 미완료","욱죽 호감도 20 이상","철권항 누적 4회 이상","남은 행동 최소 2회"],"actions":["재발생 시 해당 이벤트 완료"],"avoid":[],"depends_on":[],"note":"C204를 놓친 경우의 구제 이벤트이므로 C204 완료가 선행 조건이 아니다. 재발생 보장 여부는 버전별 확인 필요.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"필수(이전 대화 주장)","date_label":"2년차 5월 하순~6월 하순","conflict_review_required":true},{"id":"Y205","year":2,"month":5,"phase":"하순~6월 중순","route":"yukjuk","importance":"optional","title":"철권항 제작 연속 이벤트 1","place":"철권항","requirements":["철권항 누적 4회 이상 방문","욱죽 호감도 25 이상"],"actions":["철권항 방문해 제작 관련 첫 이벤트 시작"],"avoid":[],"depends_on":["Y201"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 5월 하순~6월 중순","conflict_review_required":false},{"id":"Y206","year":2,"month":5,"phase":"하순~7월 중순","route":"yukjuk","importance":"optional","title":"철권항 제작 연속 이벤트 2","place":"철권항/단조","requirements":["Y205 완료","단조 중 욱죽이 작업에 집중해 반응하지 않는 상황 2회"],"actions":["단조 반복으로 누적 조건 달성","철권항 후속 이벤트 확인"],"avoid":[],"depends_on":["Y205"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 5월 하순~7월 중순","conflict_review_required":false},{"id":"Y207","year":2,"month":6,"phase":"~7월","route":"yukjuk","importance":"optional","title":"철권항 제작 대체 분기","place":"철권항/단조","requirements":["Y205 진행","Y206 관련 상황 2회 이상 확인"],"actions":["철권항 즉시 방문하지 않고 다른 활동을 진행하면 대체 이벤트 가능"],"avoid":[],"depends_on":["Y205"],"note":"Y206 후속과 양립 여부·시간 조건 미검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 6월 ~7월","conflict_review_required":true},{"id":"Y208","year":2,"month":5,"phase":"~7월","route":"yukjuk","importance":"optional","title":"특수 경량 방어구 제작","place":"철권항","requirements":["1년차 초기 특별 아이템 소지(C101)","철권문 가입","관련 단조 비급 수련"],"actions":["철권항에서 제작·판매 반복","설계도 및 강화 선택지 확인"],"avoid":[],"depends_on":["C101"],"note":"이전 답변의 「역린보의」 제작. 세부 획득 난도 및 구성 단계 재검증 필요.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 5월 ~7월","conflict_review_required":false},{"id":"U203","year":2,"month":4,"phase":"~5월 중순","route":"usomae","importance":"optional","title":"학애 특수 수련","place":"학애","requirements":["특수 지역 해금(U202)","경공 60 이상 권장(필수 수치 아님)"],"actions":["학애에서 반복 대련","이전 설명 기준 무승부 +2, 승리 +1로 진행도 4 이상 목표"],"avoid":["계절 시험 이후 진입이 제한될 수 있어 5월 중순 전 진행 권장"],"depends_on":["U202"],"note":"10월 20일 패치 후 조건 완화 언급. 판정 공식·경공 60 필수 여부는 미검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"선택","date_label":"2년차 4월 ~5월 중순","conflict_review_required":true},{"id":"C206","year":2,"month":4,"phase":"~7월","route":"common","importance":"optional","title":"공동파 탐험대 무작위 후속","place":"비천각/단조","requirements":["공동파 탐험대 결성(C203)"],"actions":["비천각 수련 또는 단조 실행 반복","무작위 탐험대 이벤트 확인"],"avoid":[],"depends_on":["C203"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"선택","date_label":"2년차 4월 ~7월","conflict_review_required":false},{"id":"Y209","year":2,"month":8,"phase":"상순","route":"yukjuk","importance":"optional","title":"제작 설계도 획득 이벤트","place":"철권항/자동 이벤트","requirements":["철권항 제작 연속 이벤트 선행조건 충족"],"actions":["8월 이벤트에서 설계도 관련 선택"],"avoid":[],"depends_on":["Y205","Y206"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 8월 상순","conflict_review_required":false},{"id":"Y210","year":2,"month":8,"phase":"상순","route":"yukjuk","importance":"required","title":"욱죽 송별·심계 분기","place":"공동파 유학 종료","requirements":["심계 대상 욱죽","욱죽 호감도가 다른 공동파 여성 인물보다 높음"],"actions":["해당 시점 이전에 심계 확인","유학 종료 관련 선택지 유지"],"avoid":[],"depends_on":[],"note":"비교 대상 및 호감도 동률 처리 미검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"필수(이전 대화 주장)","date_label":"2년차 8월 상순","conflict_review_required":false},{"id":"U204","year":2,"month":8,"phase":"상순","route":"usomae","importance":"required","title":"우소매 송별·심계 분기","place":"공동파 유학 종료","requirements":["심계 대상 우소매","하후란의 제자가 되는 경로를 피함"],"actions":["우소매 전용 이벤트 확인","유학 종료 관련 선택지에서 우소매 경로 유지"],"avoid":[],"depends_on":[],"note":"호감도 5성은 안전 목표일 뿐 이 시점 필수 최소치 미검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"필수(이전 대화 주장)","date_label":"2년차 8월 상순","conflict_review_required":false},{"id":"Y211","year":2,"month":9,"phase":"중순","route":"yukjuk","importance":"optional","title":"설계도 활용 제작","place":"관련 제작 이벤트","requirements":["8월 설계도 획득(Y209)"],"actions":["후속 제작 선택지 확인"],"avoid":[],"depends_on":["Y209"],"note":"이전 답변은 특정 설계도 활용을 언급. 장소·정확한 날짜 재검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 9월 중순","conflict_review_required":false},{"id":"U205","year":2,"month":10,"phase":"상순","route":"usomae","importance":"required","title":"강릉 야간 우소매 분기","place":"강릉 야간","requirements":["우소매 경로 유지"],"actions":["잠들지 않고 권법 수련 선택","관련 인물 등장 시 한 번 더 수련","우소매 관련 동행 선택"],"avoid":["야간 다른 행동을 선택하기 전에 저장 추천"],"depends_on":["U204"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"필수(이전 대화 주장)","date_label":"2년차 10월 상순","conflict_review_required":false},{"id":"Y212","year":2,"month":10,"phase":"상순~중순","route":"yukjuk","importance":"required","title":"강릉 이후 욱죽 분기","place":"강릉 및 귀환 구간","requirements":["욱죽 4월 연속 이벤트 완료(C204)","욱죽 관계·심계 유지"],"actions":["강릉 마지막 주요 이벤트 종료 후 욱죽 관련 후속 경로 선택","당문 합류 여부 확인"],"avoid":[],"depends_on":["C204","Y210"],"note":"구체 선택지 텍스트/정확한 날짜 미검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"필수(이전 대화 주장)","date_label":"2년차 10월 상순~중순","conflict_review_required":false},{"id":"Y213","year":2,"month":10,"phase":"중순 이후","route":"yukjuk","importance":"optional","title":"욱죽 무공 수련","place":"당문 뒷산","requirements":["욱죽 당문 체류(Y212)"],"actions":["뒷산에서 욱죽과 수련 2회 이상"],"avoid":[],"depends_on":["Y212"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 10월 중순 이후","conflict_review_required":false},{"id":"Y214","year":2,"month":10,"phase":"중순 이후","route":"yukjuk","importance":"optional","title":"시장 일거리 후속","place":"시장","requirements":["욱죽 뒷산 수련 2회 이상(Y213)"],"actions":["하산 후 시장에서 일거리 관련 선택"],"avoid":[],"depends_on":["Y213"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 10월 중순 이후","conflict_review_required":false},{"id":"U206","year":2,"month":10,"phase":"~12월","route":"usomae","importance":"optional","title":"우소매 당문 생활 이벤트","place":"부엌·연단방·연무장·뒷산","requirements":["우소매가 당문에 머묾"],"actions":["각 장소에서 해당 활동을 실행해 무작위 이벤트 확인"],"avoid":[],"depends_on":["U205"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"선택","date_label":"2년차 10월 ~12월","conflict_review_required":false},{"id":"U207","year":2,"month":10,"phase":"~12월","route":"usomae","importance":"optional","title":"추가 동료 탐험 이벤트","place":"시장","requirements":["우소매·엽운상·소사매 모두 당문에 있음","1년차 엽씨 남매 체류 조건 완료"],"actions":["시장에서 관련 활동 반복"],"avoid":[],"depends_on":["C104","U205"],"note":"이전 답변의 미산 탐험대. 명칭/구체 행동 미검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"선택","date_label":"2년차 10월 ~12월","conflict_review_required":false},{"id":"Y215","year":2,"month":11,"phase":"상순~12월 상순","route":"yukjuk","importance":"optional","title":"욱죽 의복 관련 외출 이벤트","place":"대문 → 외출","requirements":["욱죽 호감도 50 이상","심계 욱죽","욱죽·우소매 모두 당문에 체류"],"actions":["기간 내 대문 외출"],"avoid":[],"depends_on":["Y212"],"note":"우소매가 당문에 체류해야 한다는 것은 공략 내 설명으로, 욱죽 단일 루트에서 실제 재현 여부 점검 필요.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"2년차 11월 상순~12월 상순","conflict_review_required":false},{"id":"Y301","year":3,"month":1,"phase":"상순","route":"yukjuk","importance":"optional","title":"제작 연속 이벤트 마무리","place":"당문","requirements":["2년차 철권항 제작 연속 이벤트 완료(Y205/Y206)"],"actions":["이전 답변 기준 일부 동행 선택을 피하고 당문 잔류 후속 확인"],"avoid":[],"depends_on":["Y206"],"note":"선택지의 실제 맥락 공개 없이 표기. 조건 재검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"3년차 1월 상순","conflict_review_required":false},{"id":"C301","year":3,"month":1,"phase":"하순","route":"common","importance":"optional","title":"의술 추가 분기","place":"당문 관련 이벤트","requirements":["의술 Lv.5 이상 또는 연단 누적 250점이라는 기존 설명","내력 55 이상 권장"],"actions":["정해진 추가 이벤트 선택지를 진행","선택 이전 저장"],"avoid":[],"depends_on":[],"note":"결연 필수가 아니며 이전 답변에서 상세 스토리명을 제거. 수치 미검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"선택","date_label":"3년차 1월 하순","conflict_review_required":true},{"id":"Y302","year":3,"month":1,"phase":"하순~2월 상순","route":"yukjuk","importance":"optional","title":"욱죽 관계 관련 대체 선택","place":"당문 대장간","requirements":["욱죽 당문 체류"],"actions":["당문 대장간을 방문","별도 경로와 정규 루트 중 선택 전에 저장"],"avoid":[],"depends_on":["Y212"],"note":"정규 루트를 유지하려면 우발적인 분기 진입을 피하도록 경고.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"3년차 1월 하순~2월 상순","conflict_review_required":false},{"id":"Y303","year":3,"month":2,"phase":"상순","route":"yukjuk","importance":"optional","title":"특수 방어구 후속","place":"당문 관련 이벤트","requirements":["2년차 11~12월 의복 이벤트 완료(Y215)","욱죽 호감도 50 이상","심계 욱죽"],"actions":["후속 이벤트 확인","특수 방어구 강화 선택지 확인"],"avoid":[],"depends_on":["Y215"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"3년차 2월 상순","conflict_review_required":false},{"id":"U301","year":3,"month":2,"phase":"상순~3월 상순","route":"usomae","importance":"optional","title":"우소매 전용 장비","place":"당문 및 후속 이벤트","requirements":["우소매 호감도 5성 이상 권장","2년차 우소매 동행·당문 합류 완료","3년차 1월 특정 선택에서 당문 잔류"],"actions":["2월 관련 후속 이벤트","3월 상순 후속 조건 확인"],"avoid":[],"depends_on":["U205"],"note":"전용 장비 수집 전용. 결연 필수로 판단하지 말 것.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"선택","date_label":"3년차 2월 상순~3월 상순","conflict_review_required":false},{"id":"C302","year":3,"month":5,"phase":"상순","route":"common","importance":"required","title":"공동파 후반 진입 분기","place":"외성 및 후속 선택지","requirements":["2년차 공동파 중요 선행 이벤트 완료 여부 점검","주요 전투 구간 통과"],"actions":["공동파로 향하는 후속 선택"],"avoid":[],"depends_on":["C204"],"note":"기존 답변에서는 욱죽 연속 이벤트를 두 루트 공통 필수로 기술. 검증 전 조건 강제 금지.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"필수(이전 대화 주장)","date_label":"3년차 5월 상순","conflict_review_required":true},{"id":"C303","year":3,"month":5,"phase":"상순","route":"common","importance":"required","title":"공동파 단체전","place":"공동파","requirements":["C302 후속 경로 진입"],"actions":["적 전멸 또는 7회합 생존이라는 이전 공략 조건"],"avoid":[],"depends_on":["C302"],"note":"정확한 회합 판정 검증 필요.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"필수(이전 대화 주장)","date_label":"3년차 5월 상순","conflict_review_required":false},{"id":"U302","year":3,"month":5,"phase":"상순","route":"usomae","importance":"required","title":"우소매 특수 전투 A","place":"공동파","requirements":["우소매 경로 유지","C303 통과"],"actions":["상대를 쓰러뜨리지 않고 7회합까지 생존"],"avoid":["고화력 공격보다 생존 우선"],"depends_on":["C303","U205"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"필수(이전 대화 주장)","date_label":"3년차 5월 상순","conflict_review_required":true},{"id":"U303","year":3,"month":5,"phase":"상순","route":"usomae","importance":"required","title":"우소매 특수 전투 B","place":"공동파","requirements":["U302 통과"],"actions":["구공(嘴攻) 5회 이상 성공"],"avoid":["대상 조기 처치 주의"],"depends_on":["U302"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"필수(이전 대화 주장)","date_label":"3년차 5월 상순","conflict_review_required":true},{"id":"Y304","year":3,"month":5,"phase":"상순","route":"yukjuk","importance":"required","title":"욱죽 특수 전투","place":"공동파","requirements":["욱죽 경로 유지","C303 통과"],"actions":["상대 방어 중 찌르기 3회 실행","전용 진행 조건 확인"],"avoid":[],"depends_on":["C303","Y212"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"필수(이전 대화 주장)","date_label":"3년차 5월 상순","conflict_review_required":true},{"id":"C304","year":3,"month":5,"phase":"상순","route":"common","importance":"required","title":"결연 확정 선택","place":"공동파 후반","requirements":["선택한 루트의 특수 전투 조건 충족","해당 인물 심계 유지"],"actions":["해당 인물을 우선하는 선택","이전 답변 기준 장문인 지위 수락 경로 회피"],"avoid":[],"depends_on":["C303"],"note":"선택지의 정확한 문구/공동 조건 재검증.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"필수(이전 대화 주장)","date_label":"3년차 5월 상순","conflict_review_required":true},{"id":"Y305","year":3,"month":5,"phase":"상순","route":"yukjuk","importance":"optional","title":"이전 회차 업적 연계 추가 이벤트","place":"공동파 후반","requirements":["이전 회차 우소매 서무림맹 결말 업적 보유(이전 답변 주장)","운명점 50 이상 보유"],"actions":["관련 추가 이벤트 분기 확인"],"avoid":[],"depends_on":[],"note":"매우 높은 불확실성: 이전 회차 업적·운명점 50 조건은 독립 검증 전 확정 표기 금지.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"3년차 5월 상순","conflict_review_required":true},{"id":"Y306","year":3,"month":8,"phase":"중순","route":"yukjuk","importance":"optional","title":"무림대회 욱죽 동행","place":"당문 대장간","requirements":["욱죽 결연 진행"],"actions":["무림대회 출발 전에 대장간 방문","동행 제안"],"avoid":[],"depends_on":["Y304"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"3년차 8월 중순","conflict_review_required":false},{"id":"U304","year":3,"month":8,"phase":"중순","route":"usomae","importance":"optional","title":"무림대회 우소매 동행","place":"당문 부엌","requirements":["우소매 결연 진행"],"actions":["무림대회 출발 전에 부엌 방문","동행 관련 선택"],"avoid":[],"depends_on":["U303"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"선택","date_label":"3년차 8월 중순","conflict_review_required":false},{"id":"Y307","year":3,"month":9,"phase":"하순~10월 상순","route":"yukjuk","importance":"optional","title":"금향궁 대련 후속","place":"금향궁 무영전","requirements":["무림대회 욱죽 동행(Y306)"],"actions":["무영전에서 수련","제자 대련 누적 3회 승리","변화구 관련 선택지 확인"],"avoid":[],"depends_on":["Y306"],"note":"비녀 보유 시 추가 선택 가능(이전 답변)","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"3년차 9월 하순~10월 상순","conflict_review_required":false},{"id":"U305","year":3,"month":9,"phase":"하순","route":"usomae","importance":"optional","title":"금향궁 동행 후속","place":"금향궁","requirements":["우소매 동행(U304)"],"actions":["안내 및 대화 선택지 확인"],"avoid":[],"depends_on":["U304"],"note":"선택지 세부 문구 검증 전 생략.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"선택","date_label":"3년차 9월 하순","conflict_review_required":false},{"id":"Y308","year":3,"month":10,"phase":"중순","route":"yukjuk","importance":"optional","title":"객잔 휴식 추가 이벤트","place":"귀환길 객잔","requirements":["욱죽과 무림대회 동행(Y306)"],"actions":["아래층 음주 대신 바로 휴식 선택"],"avoid":[],"depends_on":["Y306"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"3년차 10월 중순","conflict_review_required":false},{"id":"C305","year":3,"month":12,"phase":"중순 전후","route":"common","importance":"recommended","title":"서무림맹 분기 조건 점검","place":"당문 회의·주요 선택지","requirements":["학문+전술 직접 제안 OR 이부귀·개방 호감도 대체 경로"],"actions":["관련 회의에서 서무림맹 결성 경로 선택"],"avoid":[],"depends_on":["C106"],"note":"직접 제안 조건에 학문 60+전술 Lv.5 vs 학문 80 초과+전술 Lv.5 등 상충. 전술 Lv.8 단독도 이전 답변 주장. 인연 경로는 2성 최소 vs 3성 안전 목표 혼재. 상세 내용은 06_검증대상.md 참조.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"추천","date_label":"3년차 12월 중순 전후","conflict_review_required":true},{"id":"Y309","year":3,"month":12,"phase":"상순","route":"yukjuk","importance":"optional","title":"욱죽 장비 선택 이벤트","place":"당문 대장간","requirements":["욱죽 결연 상태"],"actions":["당문 회의 이후 대장간 방문","설계도 및 장비 선택 전 저장"],"avoid":[],"depends_on":["Y304"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"3년차 12월 상순","conflict_review_required":false},{"id":"Y310","year":3,"month":12,"phase":"중순","route":"yukjuk","importance":"optional","title":"서무림맹 연동 욱죽 후속","place":"당문 대장간","requirements":["욱죽 결연","서무림맹 분기 진입"],"actions":["대장간 방문 또는 남은 행동 1회 이하일 때 발생 여부 확인"],"avoid":[],"depends_on":["Y309","C305"],"note":"두 개의 발생 경로(대장간/행동1회 이하)는 검증 필요.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"3년차 12월 중순","conflict_review_required":false},{"id":"Y401","year":4,"month":null,"phase":"최종 구간","route":"yukjuk","importance":"optional","title":"욱죽 최종 추가 장비 이벤트","place":"최종 출격 전후","requirements":["3년차 12월 장비에서 욱죽 강화 선택","서무림맹 경로 유지"],"actions":["최종 구간 후속 여부 확인"],"avoid":[],"depends_on":["Y309","C305"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"욱죽","importance_label":"선택","date_label":"4년차 최종 구간","conflict_review_required":false},{"id":"U401","year":4,"month":null,"phase":"최종 구간","route":"usomae","importance":"optional","title":"우소매 최종 추가 이벤트","place":"최종 구간","requirements":["우소매 결연 상태","우소매 심계 및 동행 선행 조건 유지"],"actions":["후속 선택지 확인"],"avoid":[],"depends_on":["U303","U304"],"note":"","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"우소매","importance_label":"선택","date_label":"4년차 최종 구간","conflict_review_required":false},{"id":"C401","year":4,"month":null,"phase":"최종 구간","route":"common","importance":"recommended","title":"결연·세력 경로 최종 점검","place":"최종 구간","requirements":["해당 루트 결연 완료","선택한 세력 경로 유지"],"actions":["최종 전투 준비 및 관련 선택지 확인"],"avoid":[],"depends_on":[],"note":"4년차에 별도 필수 능력치 숫자는 이전 대화에서 제시되지 않음.","verification":"수치·분기 독립검증 필요","provenance":"현재 대화의 이전 답변 재구성(출처 링크 별도 수집 필요)","route_label":"공통","importance_label":"추천","date_label":"4년차 최종 구간","conflict_review_required":false}],"verification_issues":[{"id":"V01","subject":"1년차 4월 심상 경계","details":"첫 답변 심상 30 미만, 후속 답변 30 이하. 정확한 비교연산자 불명.","related":["C101"],"priority":"high"},{"id":"V02","subject":"욱죽 4월 이벤트의 우소매 루트 필수 여부","details":"앞선 답변은 두 루트 공통 필수로 소개했으나 독립 검증 근거가 없다.","related":["C204","C205","C302"],"priority":"critical"},{"id":"V03","subject":"공동파 탐험대 호감도","details":"이전 답변: 서생/남궁천 각 10 이상. 후속 답변: 우소매 2성+3인 합 7성. 최신 패치의 정확한 최소값 확인 필요.","related":["C203"],"priority":"high"},{"id":"V04","subject":"학애 진행도 및 경공","details":"경공 60은 권장치인지 판정 필요치인지 미확정, 무승부 +2/승리+1·진행도4·5월 마감 모두 확인 필요.","related":["U203"],"priority":"high"},{"id":"V05","subject":"서무림맹 직접 제안 수치","details":"학문 60 이상+전술5 vs 학문 80 초과+전술5, 전술8 단독. 서로 다른 조건은 그대로 병기하고 확정하지 말 것.","related":["C305"],"priority":"critical"},{"id":"V06","subject":"서무림맹 인연 경로","details":"이부귀·개방 각 2성 최소라는 설명과 3성 안전 목표가 공존. 정확한 10/20 패치 반영 검증 필요.","related":["C305","C106"],"priority":"high"},{"id":"V07","subject":"3년차 5월 특수 전투 조건","details":"우소매 7회합 생존/구공5회, 욱죽 찌르기3회, 단체전 7회합: 모두 진행 정지 위험이 커 우선 검증.","related":["C303","U302","U303","Y304"],"priority":"critical"},{"id":"V08","subject":"3년차 1월 의술 분기","details":"의술5 또는 연단250 및 내력55. 결연 필수 아님. 실제 수치/관계 검증 필요.","related":["C301"],"priority":"medium"},{"id":"V09","subject":"날짜의 고정성","details":"상순/하순, 특정 상호작용 3회, 재발생 창이 10/20 업데이트 이후 정확한지 확인 필요.","related":["C104","C205","Y205","Y206","Y215"],"priority":"medium"},{"id":"V10","subject":"명칭과 스포일러","details":"대사형 관련 후반 사건/인물 운명/결말/전투 대상 등은 UI 표시 금지. 실제 대화 선택 텍스트도 스포일러 포함 여부 점검.","related":["C301","C302","C304"],"priority":"high"},{"id":"V11","subject":"3년차 5월 숨겨진 업적 연계","details":"이전 회차 우소매 결말 업적과 운명점50 필요 조건을 독립 확인하지 못함.","related":["Y305"],"priority":"high"}]}</script>
 <div id="app"><header class="hero">
-<div class="topline" style="justify-content:space-between"><span class="eyebrow">MORTAL / THE ROUTE COMPANION</span><button type="button" id="theme" class="btn">☼ 밝은 화면</button></div>
-<h1>공동신위 <i>路</i><br>스포일러 없는 공략</h1><p class="lead">욱죽·우소매 루트, 1~4년차의 날짜별 이벤트와 필요한 조건을 하나의 타임라인으로. 이야기의 결과는 숨기고 플레이에 필요한 행동만 안내합니다.</p>
-<div class="hero-bottom"><div><div class="eyebrow" style="margin-bottom:10px">현재 진행 중인 루트</div><div class="tabs" role="tablist" aria-label="루트 선택"><button type="button" class="tab" id="yTab" role="tab" aria-selected="true">욱죽 루트</button><button type="button" class="tab" id="uTab" role="tab" aria-selected="false">우소매 루트</button></div><p class="sub">공통 이벤트도 루트별 완료 상태는 독립적으로 저장합니다.</p></div>
-<div><div class="progressmeta"><span id="progressLabel" class="sub">전체 진행률</span><strong class="num" id="progress">0 / 0</strong></div><div class="meter" id="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="완료 진행률"><div class="bar" id="bar"></div></div><div class="sub" id="percent">0%</div></div></div>
+<div class="topline"><div class="brand"><span class="brand-mark"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-layers"></use></svg></span><span class="eyebrow">MORTAL · 활협전 플레이 가이드</span></div><button type="button" id="theme" class="btn ghost" title="화면 테마 전환"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-sun"></use></svg><span>밝은 화면</span></button></div>
+<div class="hero-intro"><h1>공동신위 <i>路</i></h1><p class="hero-subtitle">스포일러 없는 공략</p><p class="lead">욱죽·우소매 루트, 1~4년차의 날짜별 이벤트와 필요한 조건을 하나의 타임라인으로. 이야기의 결과는 숨기고 플레이에 필요한 행동만 안내합니다.</p></div>
+<div class="hero-bottom"><div><span class="route-label">현재 진행 중인 루트</span><div class="tabs" role="tablist" aria-label="루트 선택"><button type="button" class="tab" id="yTab" role="tab" aria-controls="routePanel" aria-selected="true"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-user"></use></svg>욱죽 루트</button><button type="button" class="tab" id="uTab" role="tab" aria-controls="routePanel" aria-selected="false" tabindex="-1"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-user"></use></svg>우소매 루트</button></div><p class="sub route-copy">공통 이벤트의 완료 상태도 루트별로 저장합니다.</p></div>
+<div class="progress-panel"><div class="progressmeta"><span id="progressLabel" class="sub">전체 진행률</span><strong class="num" id="progress">0 / 0</strong></div><div class="meter" id="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="완료 진행률"><div class="bar" id="bar"></div></div><div class="sub" id="percent">0%</div></div></div>
 </header>
-<div class="notice"><strong>공략 정확성 고지.</strong> 날짜·수치·필수 여부는 기존 대화에서 정리한 초안으로 독립 검증되지 않았습니다. 원문 확인 전 확정 조건으로 믿지 마세요.</div><div id="alert" class="notice hidden" role="alert"></div>
-<div class="layout"><aside class="side" aria-label="탐색 및 관리"><h2>YEAR INDEX</h2><div class="navyears" id="years"></div><hr><h2>MY PROGRESS</h2>
-<button type="button" id="backup" class="btn">↓ 진행 백업</button><button type="button" id="restore" class="btn">↑ 백업 복원</button><button type="button" id="reset" class="btn">↺ 전체 초기화</button><p class="sub tip">다른 기기에서 이어 할 때는 JSON 백업을 복원하세요.</p><hr><h2>PRINT / PDF</h2>
-<select id="printScope" class="search" aria-label="인쇄 범위"><option value="current">현재 루트 전체</option><option value="yukjuk">욱죽 루트 전체</option><option value="usomae">우소매 루트 전체</option><option value="required">현재 루트 필수</option><option value="filtered">현재 필터 결과</option></select><button type="button" class="btn" id="print">▤ 인쇄 / PDF</button>
-</aside><main class="main"><section class="toolbox" aria-label="이벤트 필터">
-<label for="search" class="sub">이벤트 · 장소 · 날짜 · 능력치 · 호감도 검색</label><input id="search" type="search" class="search" placeholder="예: 철권항, 의술 5, 2년차 4월">
-<div id="filters" class="filters"></div><div class="switches"><label><input type="checkbox" id="incomplete"> 미완료만</label><label><input type="checkbox" id="unverified"> 검증 필요만</label><label><input type="checkbox" id="hideDone"> 완료 숨기기</label></div></section>
-<div class="resultline"><span id="resultText" aria-live="polite"></span><button type="button" class="btn" id="clear">필터 초기화</button></div><div id="timeline"></div>
+<div class="notice"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-info"></use></svg><div><strong>공략 정확성 안내</strong> · 날짜·수치·필수 여부는 기존 대화에서 정리한 초안으로 독립 검증되지 않았습니다. 원문 확인 전 확정 조건으로 믿지 마세요.</div></div><div id="alert" class="notice hidden" role="alert"></div>
+<div class="layout"><aside class="side" aria-label="탐색 및 관리"><section class="side-section"><h2>연차별 탐색</h2><div class="navyears" id="years" role="group" aria-label="연차 선택"></div></section><hr><section class="side-section"><h2>내 진행 기록</h2>
+<button type="button" id="backup" class="btn"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-download"></use></svg>진행 백업하기</button><button type="button" id="restore" class="btn"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-upload"></use></svg>백업 복원하기</button><button type="button" id="reset" class="btn ghost danger-text"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-reset"></use></svg>전체 초기화하기</button><p class="sub tip">다른 기기에서 이어 하려면<br>JSON 백업을 복원하세요.</p><p id="backupStatus" class="sub operation-feedback hidden" role="alert" tabindex="-1"></p></section><hr><section class="side-section"><h2>인쇄 및 PDF</h2>
+<div class="select-wrap"><select id="printScope" class="search" aria-label="인쇄 범위"><option value="current">현재 루트 전체</option><option value="yukjuk">욱죽 루트 전체</option><option value="usomae">우소매 루트 전체</option><option value="required">현재 루트 필수</option><option value="filtered">현재 필터 결과</option></select><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-chevron"></use></svg></div><button type="button" class="btn" id="print"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-printer"></use></svg>인쇄 / PDF 저장하기</button></section>
+</aside><main class="main" id="routePanel" role="tabpanel" aria-labelledby="yTab" tabindex="-1"><section class="toolbox" aria-label="이벤트 필터">
+<div class="toolbox-head"><label for="search">이벤트 찾아보기</label><span class="sub" id="searchHelp">이벤트 · 장소 · 날짜 · 능력치 · 호감도</span></div><div class="search-wrap"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-search"></use></svg><input id="search" type="search" class="search" placeholder="예: 철권항, 의술 5, 2년차 4월" aria-describedby="searchHelp" aria-keyshortcuts="/"><kbd class="search-key" aria-hidden="true">/</kbd></div>
+<div class="filter-row"><span class="filter-label" id="importanceLabel">중요도</span><div id="filters" class="filters" role="group" aria-labelledby="importanceLabel"></div></div><div class="switches"><label><input type="checkbox" role="switch" id="incomplete"> 미완료만</label><label><input type="checkbox" role="switch" id="unverified"> 검증 필요만</label><label><input type="checkbox" role="switch" id="hideDone"> 완료 숨기기</label></div></section>
+<div class="resultline"><span id="resultText" aria-live="polite"></span><button type="button" class="btn ghost" id="clear"><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-reset"></use></svg>필터 초기화하기</button></div><div id="timeline"></div>
 <p class="sub">기간 이벤트는 최초 발생 가능 시점을 기준으로 정렬했습니다. 카드의 기간 표기는 확정된 단일 날짜가 아닙니다. 체크 표시는 게임 내 능력치나 실제 분기 충족 여부를 판정하지 않습니다.</p>
-</main></div><footer class="foot">《공동신위》 오프라인 가이드 · 데이터 원본 2026-10-23 · 모든 이벤트 조건 독립 검증 필요 · 서버와 외부 연결 없음</footer>
+</main></div><footer class="foot">《공동신위》 오프라인 가이드 · 데이터 원본 2026-10-23 · 모든 이벤트 조건 독립 검증 필요 · 진행 기록은 이 브라우저에 저장됩니다.</footer>
 <input class="hidden" id="backupInput" type="file" accept=".json,application/json" aria-label="진행 백업 JSON 선택"></div><div id="printView"></div>
+<dialog id="actionDialog" class="action-dialog" aria-labelledby="actionTitle" aria-describedby="actionMessage"><h2 id="actionTitle"></h2><p id="actionMessage"></p><div class="dialog-actions"><button type="button" id="actionCancel" class="btn">취소하기</button><button type="button" id="actionAccept" class="btn primary"></button></div></dialog>
+<div id="uiToast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden><svg class="icon " viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ui-check"></use></svg><span id="uiToastText"></span></div>
+<script id="m-ui-utils">
+"use strict";
+(function(){
+  const $=id=>document.getElementById(id);
+  function icon(name,extra=""){
+    const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+    svg.setAttribute("class","icon"+(extra?" "+extra:""));svg.setAttribute("viewBox","0 0 24 24");svg.setAttribute("aria-hidden","true");svg.setAttribute("focusable","false");
+    const use=document.createElementNS("http://www.w3.org/2000/svg","use");use.setAttribute("href","#ui-"+name);svg.append(use);return svg;
+  }
+  let toastTimer;
+  function toast(message){clearTimeout(toastTimer);$("uiToastText").textContent=message;$("uiToast").hidden=false;toastTimer=setTimeout(()=>$("uiToast").hidden=true,2300)}
+  function confirmAction({title,message,action,danger=false}){
+    const dialog=$("actionDialog"),accept=$("actionAccept"),cancel=$("actionCancel"),previous=document.activeElement;
+    if(typeof dialog.showModal!=="function")return Promise.resolve(window.confirm(title+"\n\n"+message));
+    if(dialog.open)return Promise.resolve(false);
+    $("actionTitle").textContent=title;$("actionMessage").textContent=message;accept.textContent=action;accept.className="btn "+(danger?"danger":"primary");
+    return new Promise(resolve=>{
+      function finish(result){accept.removeEventListener("click",yes);cancel.removeEventListener("click",no);dialog.removeEventListener("cancel",no);dialog.removeEventListener("close",closed);if(dialog.open)dialog.close();if(previous?.isConnected)previous.focus({preventScroll:true});resolve(result)}
+      function yes(){finish(true)}function no(e){if(e)e.preventDefault();finish(false)}function closed(){finish(false)}
+      accept.addEventListener("click",yes);cancel.addEventListener("click",no);dialog.addEventListener("cancel",no);dialog.addEventListener("close",closed);
+      dialog.showModal();cancel.focus({preventScroll:true});
+    });
+  }
+  window.MORTAL_UI=Object.freeze({icon,toast,confirmAction});
+})();
+</script>
 <script>
 "use strict";
 (function(){
 const D=JSON.parse(document.getElementById("data").textContent),E=D.events,M=new Map(E.map(e=>[e.id,e]));
 const RN={yukjuk:"욱죽",usomae:"우소매"},IN={required:"필수",recommended:"추천",optional:"선택"},K="MORTAL_PROGRESS_V1",VERS=1,SCHEMA="mortal-progress";
+const {icon,toast,confirmAction}=window.MORTAL_UI;
 const $=id=>document.getElementById(id),all=r=>E.filter(e=>e.route==="common"||e.route===r),done=e=>S.done[S.route][e.id]===true;
 const safe=s=>/결말|엔딩|운명점|운명|사망|죽음|흑막|정체/.test(String(s))?"스포일러 방지를 위해 해당 설명을 숨겼습니다.":String(s);
 function el(tag,cls,text){let x=document.createElement(tag);if(cls)x.className=cls;if(text!==undefined)x.textContent=String(text);return x}
@@ -84,32 +729,35 @@ const issues=e=>(D.verification_issues||[]).filter(x=>x.related.includes(e.id));
 const needsVerify=e=>!!e.verification||!!e.conflict_review_required||!e.verified_source_url;
 function matches(e){if(year&&e.year!==year)return false;if(importance!=="all"&&e.importance!==importance)return false;if((incomplete||hideDone)&&done(e))return false;if(unverifiedOnly&&!needsVerify(e))return false;if(search){let v=[e.id,e.title,e.place,e.date_label,e.year+"년차",e.month+"월",e.phase,...e.requirements,...e.actions,...e.avoid,e.note||""].map(safe).join(" ").toLocaleLowerCase("ko");if(!v.includes(search.toLocaleLowerCase("ko")))return false}return true}
 function field(p,title,values,ol){let a=(Array.isArray(values)?values:[values]).filter(v=>v!==null&&v!==undefined&&String(v).trim());if(!a.length)return;add(p,"h4","",title);let list=el(ol?"ol":"ul");a.forEach(v=>add(list,"li","",safe(v)));p.append(list)}
-function makeCard(e){let row=el("div","row"),lab=el("label","check"),input=el("input");input.type="checkbox";input.checked=done(e);input.setAttribute("aria-label",e.title+" 완료");input.addEventListener("change",()=>{if(input.checked)S.done[S.route][e.id]=true;else delete S.done[S.route][e.id];save();render()});lab.append(input);row.append(lab);
+function makeCard(e){let row=el("div","row"),lab=el("label","check"),input=el("input");input.type="checkbox";input.dataset.focusKey="event-"+e.id;input.checked=done(e);input.setAttribute("aria-label",e.title+" 완료");input.addEventListener("change",()=>{if(input.checked)S.done[S.route][e.id]=true;else delete S.done[S.route][e.id];save();render()});let box=el("span","check-box");box.setAttribute("aria-hidden","true");box.append(icon("check"));lab.append(input,box);row.append(lab);
 let detail=el("details","event "+e.importance+(done(e)?" done":""));detail.dataset.eid=e.id;detail.open=opened.has(e.id);let sum=el("summary"),meta=el("div","cardmeta");
-add(meta,"span","date",e.date_label||e.year+"년차");add(meta,"span","flag "+e.importance,IN[e.importance]||e.importance);if(needsVerify(e))add(meta,"span","flag verify",e.conflict_review_required?"⚠ 조건 충돌":"검증 필요");sum.append(meta);
+add(meta,"span","date",e.date_label||e.year+"년차");add(meta,"span","flag "+e.importance,IN[e.importance]||e.importance);if(needsVerify(e))add(meta,"span","flag verify",e.conflict_review_required?"조건 충돌":"검증 필요").prepend(icon(e.conflict_review_required?"warning":"info"));sum.append(meta);
 add(sum,"div","ename",safe(e.title));add(sum,"p","cond",e.requirements.slice(0,2).map(safe).join(" · ")||"기록된 별도 조건 없음");
-let tail=el("div","cardmeta");add(tail,"span","",e.route==="common"?"공통":"전용");add(tail,"span","",safe(e.place||"장소 미상"));add(tail,"span","hint","자세히 보기 ↗");sum.append(tail);detail.append(sum);
+let tail=el("div","cardmeta");add(tail,"span","route-tag",e.route==="common"?"공통":"전용");add(tail,"span","",safe(e.place||"장소 미상"));let hint=add(tail,"span","hint");hint.setAttribute("aria-hidden","true");add(hint,"span","hint-closed","자세히 보기");add(hint,"span","hint-open","접기");sum.append(tail,icon("chevron","event-chevron"));detail.append(sum);
 let body=el("div","detail");field(body,"발생 시점",[e.date_label],false);field(body,"장소",[e.place],false);field(body,"능력치 · 호감도 · 발생 조건",e.requirements,false);field(body,"진행 및 선택 순서",e.actions,true);field(body,"피해야 할 선택 · 기한",e.avoid,false);
 if(e.depends_on.length){add(body,"h4","","선행 이벤트 · 체크는 실제 조건 충족과 별개");let deps=el("div","deps");e.depends_on.forEach(id=>{let p=M.get(id),b=el("button",done(p)?"yes":"no",(done(p)?"✓ ":"○ ")+id+" · "+p.title);b.type="button";b.addEventListener("click",()=>jump(id));deps.append(b)});body.append(deps)}
 field(body,"메모",[e.note],false);
 if(needsVerify(e)){let box=el("div","warning");add(box,"strong","","⚠ 원문 미검증 · 필수 여부 확정 아님");issues(e).forEach(i=>add(box,"p","",i.id+" · "+safe(i.subject)+" — "+safe(i.details)));body.append(box)}
 detail.append(body);detail.addEventListener("toggle",()=>{detail.open?opened.add(e.id):opened.delete(e.id)});row.append(detail);return row}
-function jump(id){const e=M.get(id);if(!e)return;if(!all(S.route).includes(e)){warning("해당 선행 이벤트가 현재 루트에 없습니다.");return}reset(false);closedYears.delete(e.year);opened.add(id);render();const x=Array.from(document.querySelectorAll("[data-eid]")).find(x=>x.dataset.eid===id);if(x){x.open=true;x.scrollIntoView({block:"center",behavior:"smooth"});x.querySelector("summary").focus({preventScroll:true})}}
-function drawControls(){document.documentElement.dataset.theme=S.theme;$("theme").textContent=S.theme==="dark"?"☼ 밝은 화면":"☾ 어두운 화면";$("yTab").setAttribute("aria-selected",String(S.route==="yukjuk")),$("uTab").setAttribute("aria-selected",String(S.route==="usomae"));let list=all(S.route),n=list.filter(done).length,pct=Math.round(n/list.length*100);$("progressLabel").textContent=RN[S.route]+" 루트 진행률";$("progress").textContent=n+" / "+list.length;$("bar").style.width=pct+"%";$("percent").textContent=pct+"% 완료 · 전체 이벤트 기준";$("meter").setAttribute("aria-valuenow",pct);
-let years=$("years");years.replaceChildren();[[0,"전체"],[1,"1년차"],[2,"2년차"],[3,"3년차"],[4,"4년차"]].forEach(([v,n])=>{let b=el("button","chip",n);b.type="button";b.setAttribute("aria-pressed",String(v===year));b.addEventListener("click",()=>{year=v;closedYears.clear();render();$("timeline").scrollIntoView({block:"start"})});years.append(b)});
-let f=$("filters");f.replaceChildren();[["all","전체"],["required","필수"],["recommended","추천"],["optional","선택"]].forEach(([v,n])=>{let b=el("button","chip",n);b.type="button";b.setAttribute("aria-pressed",String(v===importance));b.addEventListener("click",()=>{importance=v;render()});f.append(b)})}
-function render(){drawControls();let data=sorted(all(S.route).filter(matches)),list=$("timeline");list.replaceChildren();$("resultText").textContent=RN[S.route]+" 루트 · "+data.length+"개 표시 / "+all(S.route).length+"개 전체";if(!data.length){add(list,"div","empty","해당 조건의 이벤트가 없습니다. 검색과 필터를 확인하세요.");return}
-for(let y=1;y<=4;y++){let events=data.filter(e=>e.year===y);if(!events.length)continue;let sec=el("details","year");sec.open=!closedYears.has(y);let sm=el("summary");add(sm,"strong","",y+"년차");add(sm,"span","sub",events.length+"개 이벤트 · 눌러 접기/펼치기");sec.append(sm);let body=el("div","inner"),last=-1;events.forEach(e=>{if(last!==e.month){last=e.month;add(body,"h3","month",e.month?e.month+"월 · 시작 시점 기준":"최종 구간 · 날짜 미확정")}body.append(makeCard(e))});sec.append(body);sec.addEventListener("toggle",()=>{sec.open?closedYears.delete(y):closedYears.add(y)});list.append(sec)}}
+function jump(id){const e=M.get(id);if(!e)return;if(!all(S.route).includes(e)){warning("해당 선행 이벤트가 현재 루트에 없습니다.");return}reset(false);closedYears.delete(e.year);opened.add(id);render();const x=Array.from(document.querySelectorAll("[data-eid]")).find(x=>x.dataset.eid===id);if(x){x.open=true;x.scrollIntoView({block:"center",behavior:window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches?"auto":"smooth"});x.querySelector("summary").focus({preventScroll:true})}}
+function drawControls(){document.documentElement.dataset.theme=S.theme;$("theme").replaceChildren(icon(S.theme==="dark"?"sun":"moon"),el("span","",S.theme==="dark"?"밝은 화면":"어두운 화면"));$("theme").setAttribute("aria-label",S.theme==="dark"?"밝은 화면으로 전환":"어두운 화면으로 전환");$("yTab").tabIndex=S.route==="yukjuk"?0:-1;$("uTab").tabIndex=S.route==="usomae"?0:-1;$("routePanel").setAttribute("aria-labelledby",S.route==="yukjuk"?"yTab":"uTab");$("yTab").setAttribute("aria-selected",String(S.route==="yukjuk")),$("uTab").setAttribute("aria-selected",String(S.route==="usomae"));let list=all(S.route),n=list.filter(done).length,pct=Math.round(n/list.length*100);$("progressLabel").textContent=RN[S.route]+" 루트 진행률";$("progress").textContent=n+" / "+list.length;$("bar").style.width=pct+"%";$("percent").textContent=pct+"% 완료 · 전체 이벤트 기준";$("meter").setAttribute("aria-valuenow",pct);
+let years=$("years");years.replaceChildren();[[0,"전체"],[1,"1년차"],[2,"2년차"],[3,"3년차"],[4,"4년차"]].forEach(([v,n])=>{let b=el("button","chip",n);b.type="button";b.dataset.focusKey="year-"+v;b.prepend(icon(v?"calendar":"layers"));add(b,"span","year-count",v?list.filter(e=>e.year===v).length:list.length);b.setAttribute("aria-pressed",String(v===year));b.addEventListener("click",()=>{year=v;closedYears.clear();render();$("timeline").scrollIntoView({block:"start"})});years.append(b)});
+let f=$("filters");f.replaceChildren();[["all","전체"],["required","필수"],["recommended","추천"],["optional","선택"]].forEach(([v,n])=>{let b=el("button","chip",n);b.type="button";b.dataset.focusKey="importance-"+v;b.setAttribute("aria-pressed",String(v===importance));b.addEventListener("click",()=>{importance=v;render()});f.append(b)})}
+function restoreControlFocus(key){if(!key)return;const target=Array.from(document.querySelectorAll("[data-focus-key]")).find(n=>n.dataset.focusKey===key);if(target)target.focus({preventScroll:true})}
+function render(){let focusKey=document.activeElement?.dataset.focusKey;drawControls();let data=sorted(all(S.route).filter(matches)),list=$("timeline");list.replaceChildren();$("resultText").textContent=RN[S.route]+" 루트 · "+data.length+"개 표시 / "+all(S.route).length+"개 전체";if(!data.length){add(list,"div","empty","해당 조건의 이벤트가 없습니다. 검색과 필터를 확인하세요.");restoreControlFocus(focusKey);return}
+for(let y=1;y<=4;y++){let events=data.filter(e=>e.year===y);if(!events.length)continue;let sec=el("details","year");sec.open=!closedYears.has(y);let sm=el("summary");add(sm,"span","year-number",String(y).padStart(2,"0"));add(sm,"strong","",y+"년차");add(sm,"span","sub year-meta",events.length+"개 이벤트");sm.append(icon("chevron"));sec.append(sm);let body=el("div","inner"),last=-1;events.forEach(e=>{if(last!==e.month){last=e.month;add(body,"h3","month",e.month?e.month+"월 · 시작 시점 기준":"최종 구간 · 날짜 미확정")}body.append(makeCard(e))});sec.append(body);sec.addEventListener("toggle",()=>{sec.open?closedYears.delete(y):closedYears.add(y)});list.append(sec)}restoreControlFocus(focusKey)}
 function reset(draw=true){importance="all";year=0;search="";incomplete=unverifiedOnly=hideDone=false;$("search").value="";["incomplete","unverified","hideDone"].forEach(id=>$(id).checked=false);closedYears.clear();if(draw)render()}
-function back(){let obj={schema:SCHEMA,version:VERS,route:S.route,saved_at:new Date().toISOString(),done:S.done},blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="공동신위_진행백업_"+new Date().toISOString().slice(0,10)+".json";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000)}
-async function restore(file){if(!file)return;try{if(file.size>1048576)throw Error("파일 크기가 1MB를 넘습니다.");let obj=JSON.parse(await file.text());if(obj.schema!==SCHEMA||obj.version!==VERS||!obj.saved_at||Number.isNaN(Date.parse(obj.saved_at)))throw Error("백업 형식/버전/저장 시점이 올바르지 않습니다.");let candidate=validate({...obj,theme:S.theme});if(!confirm("현재 두 루트의 완료 기록을 백업 파일 내용으로 바꾸시겠습니까?"))return;S=candidate;save();render();alert("복원이 완료되었습니다.")}catch(e){alert("복원 실패: "+e.message+"\n기존 진행 상태는 유지됩니다.")}}
+function back(){let obj={schema:SCHEMA,version:VERS,route:S.route,saved_at:new Date().toISOString(),done:S.done},blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="공동신위_진행백업_"+new Date().toISOString().slice(0,10)+".json";document.body.append(a);a.click();a.remove();toast("진행 백업 파일을 다운로드 요청했습니다.");setTimeout(()=>URL.revokeObjectURL(url),3000)}
+async function restore(file){if(!file)return;try{if(file.size>1048576)throw Error("파일 크기가 1MB를 넘습니다.");let obj=JSON.parse(await file.text());if(obj.schema!==SCHEMA||obj.version!==VERS||!obj.saved_at||Number.isNaN(Date.parse(obj.saved_at)))throw Error("백업 형식/버전/저장 시점이 올바르지 않습니다.");let candidate=validate({...obj,theme:S.theme});if(!await confirmAction({title:"백업을 복원할까요?",message:"현재 두 루트의 완료 기록을 백업 파일 내용으로 바꿉니다. 기존 기록이 필요하면 먼저 진행 백업을 해 주세요.",action:"복원하기"}))return;S=candidate;save();render();$("backupStatus").classList.add("hidden");toast("진행 기록을 복원했습니다.")}catch(e){$("backupStatus").textContent="복원 실패: "+e.message+" 기존 진행 상태는 유지됩니다.";$("backupStatus").classList.remove("hidden");$("backupStatus").focus();$("backupStatus").scrollIntoView({block:"nearest"})}}
 function prField(p,title,items,order){let a=(Array.isArray(items)?items:[items]).filter(Boolean);if(!a.length)return;add(p,"strong","",title);let list=el(order?"ol":"ul");a.forEach(v=>add(list,"li","",safe(v)));p.append(list)}
 function makePrint(){let scope=$("printScope").value,a=scope==="yukjuk"||scope==="usomae"?all(scope):all(S.route);if(scope==="required")a=a.filter(x=>x.importance==="required");if(scope==="filtered")a=a.filter(matches);a=sorted(a);let root=$("printView");root.replaceChildren();add(root,"h1","","공동신위 · "+(RN[scope]||RN[S.route])+" 공략");add(root,"p","pr-caption","기존 대화 기반 검증 전 자료 · 인쇄 "+new Date().toLocaleDateString("ko-KR")+" · "+a.length+"개 이벤트");let ly=0,lm=-1;for(const e of a){if(ly!==e.year){ly=e.year;lm=-1;add(root,"h2","pr-year",ly+"년차")}if(lm!==e.month){lm=e.month;add(root,"h3","pr-month",lm===null?"최종 구간":lm+"월")}let c=el("section","pr-card");add(c,"div","pr-caption",(S.done[scope==="yukjuk"||scope==="usomae"?scope:S.route][e.id]?"☑ ":"☐ ")+e.date_label+" · "+IN[e.importance]+" · "+(needsVerify(e)?"⚠ 검증 필요":"검증됨")+" · "+e.id);add(c,"h4","",safe(e.title));prField(c,"장소",e.place);prField(c,"조건",e.requirements);prField(c,"진행 순서",e.actions,true);prField(c,"주의사항",e.avoid);prField(c,"선행 이벤트",e.depends_on);prField(c,"메모",e.note);if(issues(e).length)prField(c,"검증 이슈",issues(e).map(i=>i.id+" "+i.subject+" "+i.details));root.append(c)}window.print()}
 $("yTab").addEventListener("click",()=>{S.route="yukjuk";save();render()});$("uTab").addEventListener("click",()=>{S.route="usomae";save();render()});
 $("theme").addEventListener("click",()=>{S.theme=S.theme==="dark"?"light":"dark";save();render()});
 $("search").addEventListener("input",e=>{search=e.target.value.trim();render()});for(let [id,fn] of [["incomplete",v=>incomplete=v],["unverified",v=>unverifiedOnly=v],["hideDone",v=>hideDone=v]])$(id).addEventListener("change",e=>{fn(e.target.checked);render()});
 $("clear").addEventListener("click",()=>reset());$("backup").addEventListener("click",back);$("restore").addEventListener("click",()=>$("backupInput").click());$("backupInput").addEventListener("change",async e=>{await restore(e.target.files[0]);e.target.value=""});
-$("reset").addEventListener("click",()=>{if(confirm("욱죽·우소매 루트 완료 기록을 모두 초기화할까요?")){S.done={yukjuk:{},usomae:{}};save();render()}});$("print").addEventListener("click",makePrint);
+$("reset").addEventListener("click",async()=>{if(await confirmAction({title:"진행 기록을 초기화할까요?",message:"욱죽·우소매 두 루트의 완료 기록이 모두 지워집니다. 다시 사용하려면 먼저 진행 백업을 해 주세요.",action:"전체 초기화하기",danger:true})){S.done={yukjuk:{},usomae:{}};save();render();toast("두 루트의 진행 기록을 초기화했습니다.")}});$("print").addEventListener("click",makePrint);
+document.querySelector(".tabs").addEventListener("keydown",e=>{let ids=["yTab","uTab"],i=ids.indexOf(e.target.id);if(i<0)return;let n=e.key==="ArrowRight"?(i+1)%2:e.key==="ArrowLeft"?(i+1)%2:e.key==="Home"?0:e.key==="End"?1:-1;if(n<0)return;e.preventDefault();$(ids[n]).click();$(ids[n]).focus()});
+document.addEventListener("keydown",e=>{if(e.ctrlKey||e.metaKey||e.altKey||document.querySelector("dialog[open]"))return;const t=e.target;if(e.key==="/"&&!t.isContentEditable&&!/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)){e.preventDefault();$("search").focus()}else if(e.key==="Escape"&&t===$("search")){e.preventDefault();$("search").value="";search="";render()}});
 render();
 window.MORTAL_TEST=Object.freeze({get counts(){return {all:E.length,yukjuk:all("yukjuk").length,usomae:all("usomae").length}},get route(){return S.route},get progress(){return {yukjuk:Object.keys(S.done.yukjuk).length,usomae:Object.keys(S.done.usomae).length}},get sortedIds(){return sorted(E).map(e=>e.id)}});
 })();
@@ -219,7 +867,7 @@ function openGuide(key,btn){const g=guides[key];if(!g)return;const dialog=docume
  for(const s of g.sources){const a=make("a","m-source",sources[s].name);a.href=sources[s].url;a.target="_blank";a.rel="noopener noreferrer";a.style.display="block";a.style.marginBottom="6px";body.append(a)}
  returnFocus=btn;currentDialog=dialog;dialog.showModal();
 }
-function skillButton(key,inline=false){const b=make("button","m-help"+(inline?" m-help-inline":""),key+(inline?" 육성법 ↗":" · 올리는 방법 ↗"));b.type="button";b.setAttribute("aria-label",key+" 얻고 올리는 방법 확인");b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openGuide(key,b)});return b}
+function skillButton(key,inline=false){const b=make("button","m-help"+(inline?" m-help-inline":""),key+(inline?" 육성법":" · 올리는 방법"));b.type="button";b.append(window.MORTAL_UI.icon("external"));b.setAttribute("aria-label",key+" 얻고 올리는 방법 확인");b.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openGuide(key,b)});return b}
 function makeTargets(row,keys){let present=keys.filter(k=>guides[k]);if(!present.length)return;const wrap=make("div","m-prep-actions");for(const k of present)wrap.append(skillButton(k));row.append(wrap)}
 function renderBlock(next,label){const wrap=make("section","m-prep-section");wrap.append(make("div","m-prep-date",label));if(!next){wrap.append(make("p","m-prep-subtle","현재 데이터에 추가로 기록된 주요 분기가 없습니다."));return wrap}
  const e=byId.get(next),head=make("div","m-prep-head"),title=make("span","m-prep-name",e.title),date=make("span","m-prep-date",e.date_label);head.append(title,date);wrap.append(head);
@@ -242,7 +890,7 @@ function inject(){
   if(eid==="Y304"){
    for(const li of body.querySelectorAll("li"))if(li.textContent.includes("찌르기 3회"))li.textContent="일반 공격으로 무기 파손 판정 3회를 유도(2026-10-20 공개 공략 기준). 기존 '찌르기 3회' 서술과 충돌";
   }
-  const panel=make("section","m-prep");panel.append(make("h4","m-prep-title","◈ 다음 주요 분기까지의 준비"));
+  const panel=make("section","m-prep");const prepTitle=make("h4","m-prep-title","다음 주요 분기까지의 준비");prepTitle.prepend(window.MORTAL_UI.icon("layers"));panel.append(prepTitle);
   const core=(primary[route]||[]).find(id=>idx.has(id)&&idx.get(id)>idx.get(eid));
   panel.append(renderBlock(core,"다음 핵심 분기"));
   const future=(side[route]||[]).filter(id=>idx.has(id)&&idx.get(id)>idx.get(eid)&&id!==core).slice(0,2);
@@ -269,7 +917,7 @@ function inject(){
 }
 const dialog=make("dialog","m-dialog");dialog.id="m-skill-dialog";dialog.setAttribute("aria-labelledby","m-modal-title");
 const top=make("div","m-dialog-top"),titles=make("div",""),tag=make("div","eyebrow","육성 정보 · 공식 스크립트 검증 전"),h=make("h2","");h.id="m-modal-title";titles.append(tag,h);
-const close=make("button","m-dialog-close","×");close.type="button";close.setAttribute("aria-label","육성 정보 닫기");close.addEventListener("click",closeDialog);top.append(titles,close);dialog.append(top,make("div","m-dialog-body"));
+const close=make("button","m-dialog-close");close.append(window.MORTAL_UI.icon("close"));close.type="button";close.title="육성 정보 닫기 (Esc)";close.setAttribute("aria-label","육성 정보 닫기");close.addEventListener("click",closeDialog);top.append(titles,close);dialog.append(top,make("div","m-dialog-body"));
 dialog.addEventListener("click",e=>{if(e.target===dialog)closeDialog()});dialog.addEventListener("close",()=>{if(returnFocus?.isConnected)returnFocus.focus()});
 document.body.append(dialog);
 const timeline=document.getElementById("timeline");
